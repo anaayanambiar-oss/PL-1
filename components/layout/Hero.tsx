@@ -199,7 +199,11 @@ export default function Hero() {
               className="flex flex-wrap gap-3"
               style={{ animation: "fade-up 0.5s ease both", animationDelay: "300ms" }}
             >
-              <Button variant="primary" size="lg">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => { window.location.href = "/sign-up"; }}
+              >
                 🎓 Start for Free
               </Button>
               <Button variant="outline" size="lg">
