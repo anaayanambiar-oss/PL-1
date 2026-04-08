@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useAuth, UserButton } from "@clerk/nextjs";
 import Logo from "@/components/ui/Logo";
 import Button from "@/components/ui/Button";
 
@@ -43,6 +44,7 @@ function DropdownMenu({ items }: { items: { label: string; href: string }[] }) {
 }
 
 export default function Navbar() {
+  const { isSignedIn } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -121,10 +123,36 @@ export default function Navbar() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden md:block">
-            <Button variant="primary" size="sm" onClick={() => {}}>
-              Start for Free →
-            </Button>
+          <div className="hidden md:flex items-center gap-3">
+            {!isSignedIn ? (
+              <>
+                <a
+                  href="/sign-in"
+                  className="text-sm font-semibold text-[#4B5063] hover:text-[#0F1023] transition-colors px-2"
+                >
+                  Sign in
+                </a>
+                <Button variant="primary" size="sm" onClick={() => { window.location.href = "/sign-up"; }}>
+                  Start for Free →
+                </Button>
+              </>
+            ) : (
+              <>
+                <a
+                  href="/dashboard"
+                  className="text-sm font-semibold text-[#4B5063] hover:text-[#0F1023] transition-colors px-2"
+                >
+                  Dashboard
+                </a>
+                <UserButton
+                  appearance={{
+                    elements: {
+                      avatarBox: "w-8 h-8",
+                    },
+                  }}
+                />
+              </>
+            )}
           </div>
 
           {/* Mobile hamburger */}
@@ -179,10 +207,34 @@ export default function Navbar() {
                   )}
                 </div>
               ))}
-              <div className="mt-3 px-3">
-                <Button variant="primary" size="md" className="w-full">
-                  Start for Free →
-                </Button>
+              <div className="mt-3 px-3 flex flex-col gap-2">
+                {!isSignedIn ? (
+                  <>
+                    <Button
+                      variant="primary"
+                      size="md"
+                      className="w-full"
+                      onClick={() => { window.location.href = "/sign-up"; }}
+                    >
+                      Start for Free →
+                    </Button>
+                    <a
+                      href="/sign-in"
+                      className="block text-center text-sm font-semibold text-[#4B5063] hover:text-[#0252C9] py-2 transition-colors"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Already have an account? Sign in
+                    </a>
+                  </>
+                ) : (
+                  <a
+                    href="/dashboard"
+                    className="block text-center bg-[#E8F0FC] text-[#0252C9] font-semibold text-sm px-4 py-3 rounded-full"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Go to Dashboard
+                  </a>
+                )}
               </div>
             </div>
           </div>
