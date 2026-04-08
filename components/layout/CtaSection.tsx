@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/components/ui/Button";
 
 export default function CtaSection() {
@@ -28,7 +30,11 @@ export default function CtaSection() {
           learning.
         </p>
         <div className="flex flex-wrap gap-3 justify-center mt-2">
-          <Button variant="primary" size="lg">
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={() => { window.location.href = "/sign-up"; }}
+          >
             🎓 Start Learning — It&apos;s Free
           </Button>
           <Button variant="outline" size="lg">
