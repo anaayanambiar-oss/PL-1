@@ -1,6 +1,12 @@
 "use client";
 
-import { Player } from "@lottiefiles/react-lottie-player";
+import dynamic from "next/dynamic";
+
+// Load Lottie Player only in the browser — it uses document which doesn't exist on the server
+const Player = dynamic(
+  () => import("@lottiefiles/react-lottie-player").then((mod) => mod.Player),
+  { ssr: false }
+);
 
 interface Props {
   name:     string;
@@ -12,7 +18,7 @@ export default function WelcomeStep({ name, onFinish, saving }: Props) {
   return (
     <div className="text-center py-4">
 
-      {/* Lottie mascot animation */}
+      {/* Lottie mascot animation — only renders in browser */}
       <div className="w-48 h-48 mx-auto mb-2">
         <Player
           autoplay
