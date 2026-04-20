@@ -1,7 +1,7 @@
 import { type FormEvent } from "react";
 
 interface Props {
-  value:    string;
+  value: number | null;
   onChange: (v: string) => void;
   onNext:   () => void;
 }
