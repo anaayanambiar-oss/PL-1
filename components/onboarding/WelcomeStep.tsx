@@ -1,3 +1,7 @@
+"use client";
+
+import { Player } from "@lottiefiles/react-lottie-player";
+
 interface Props {
   name:     string;
   onFinish: () => void;
@@ -7,8 +11,17 @@ interface Props {
 export default function WelcomeStep({ name, onFinish, saving }: Props) {
   return (
     <div className="text-center py-4">
-      {/* Celebration */}
-      <div className="text-7xl mb-6 animate-bounce-soft">🦜</div>
+
+      {/* Lottie mascot animation */}
+      <div className="w-48 h-48 mx-auto mb-2">
+        <Player
+          autoplay
+          loop
+          src="/animation.json"
+          style={{ width: "100%", height: "100%" }}
+        />
+      </div>
+
       <h2 className="font-display font-black text-3xl text-ink mb-3">
         You&apos;re all set, {name}!
       </h2>
@@ -48,6 +61,7 @@ export default function WelcomeStep({ name, onFinish, saving }: Props) {
       >
         {saving ? "Setting up your dashboard…" : "Go to my Dashboard →"}
       </button>
+
     </div>
   );
 }
