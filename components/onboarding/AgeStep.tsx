@@ -1,7 +1,7 @@
 import { type FormEvent } from "react";
 
 interface Props {
-  value: number | null;
+  value:    string;
   onChange: (v: string) => void;
   onNext:   () => void;
 }
@@ -15,7 +15,6 @@ export default function NameStep({ value, onChange, onNext }: Props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Emoji + heading */}
       <div className="text-5xl mb-4">👋</div>
       <h2 className="font-display font-bold text-2xl text-ink mb-1">
         Welcome! What&apos;s your name?
@@ -24,7 +23,6 @@ export default function NameStep({ value, onChange, onNext }: Props) {
         This is how you&apos;ll appear on your dashboard.
       </p>
 
-      {/* Input */}
       <input
         type="text"
         value={value}
