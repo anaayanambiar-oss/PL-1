@@ -42,7 +42,7 @@ export default function DashboardNav({ name }: Props) {
         {/* User */}
         <div className="flex items-center gap-3">
           <span className="text-sm text-mid hidden sm:block">Hi, {name}</span>
-          <UserButton afterSignOutUrl="/" />
+          <UserButton />
         </div>
 
       </div>
