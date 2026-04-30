@@ -44,7 +44,7 @@ export default function DashboardShell({
     <div className="min-h-screen bg-cream">
       <DashboardNav name={displayName} />
 
-      <main className="max-w-6xl mx-auto px-6 py-10">
+      <main className="max-w-6xl mx-auto px-6 py-10 pb-24 md:pb-10">
 
         {/* ── Row 1: Greeting + Stats ──────────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
