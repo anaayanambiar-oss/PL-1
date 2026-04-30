@@ -1,0 +1,1 @@
+{"text": " Beep", "segments": [{"id": 0, "seek": 0, "start": 0.0, "end": 3.08, "text": " Beep", "tokens": [50364, 879, 595, 50518], "temperature": 1.0, "avg_logprob": -2.392422676086426, "compression_ratio": 0.3333333333333333, "no_speech_prob": 0.5678602457046509}], "language": "en"}
