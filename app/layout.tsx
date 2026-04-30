@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Baloo_2, Plus_Jakarta_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import BottomNav from "@/components/navigation/BottomNav";
-import "@/styles/globals.css";
+import "./globals.css";
 
 
 const baloo = Baloo_2({
