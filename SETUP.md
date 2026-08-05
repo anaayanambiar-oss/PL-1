@@ -1,83 +1,67 @@
-# Lesson Player — Complete Setup Guide
+# Admin Panel — Setup Guide
 
-## Files and where they go in GitHub
+## Step 1 — Run the SQL schema in Neon
 
-| File in this zip | Destination in repo |
-|------------------|---------------------|
-| `lib/lesson-types.ts` | `lib/lesson-types.ts` |
-| `lib/lesson-content.ts` | `lib/lesson-content.ts` (replace if exists) |
-| `app/lessons/[lessonId]/page.tsx` | `app/lessons/[lessonId]/page.tsx` |
-| `app/lessons/[lessonId]/not-found.tsx` | `app/lessons/[lessonId]/not-found.tsx` |
-| `app/api/lessons/complete/route.ts` | `app/api/lessons/complete/route.ts` |
-| `components/lesson/LessonPlayer.tsx` | `components/lesson/LessonPlayer.tsx` |
-| `components/lesson/LessonHeader.tsx` | `components/lesson/LessonHeader.tsx` |
-| `components/lesson/OverviewSlideView.tsx` | `components/lesson/OverviewSlideView.tsx` |
-| `components/lesson/ExplanationSlideView.tsx` | `components/lesson/ExplanationSlideView.tsx` |
-| `components/lesson/VideoSlideView.tsx` | `components/lesson/VideoSlideView.tsx` |
-| `components/lesson/MCQSlideView.tsx` | `components/lesson/MCQSlideView.tsx` |
-| `components/lesson/CompletionSlideView.tsx` | `components/lesson/CompletionSlideView.tsx` |
+Open Neon Dashboard → SQL Editor, paste and run `ADMIN_SCHEMA.sql`.
 
-## End-to-end test checklist
+This:
+- Adds `is_admin` column to the `users` table
+- Creates `lesson_slides` table (for future dynamic content)
+- Creates `site_settings` table with default values
 
-After uploading all files and Vercel rebuilds, test this exact journey:
+## Step 2 — Make yourself an admin
 
-### Step 1 — Reach the lesson
-- Sign in → go to /dashboard
-- Click "Start Lesson" on Lesson 1.1 (What is a Government?)
-- URL should change to `/lessons/l1-1`
-
-### Step 2 — Overview slide
-- Should show the lesson goal and 4 bullet points
-- Click "Let's Start →"
-
-### Step 3 — Explanation slides (4 slides)
-- Each shows an emoji, heading, and body text
-- Click "Got it ✓" to advance through each
-- Slide counter at the bottom should increment (1/7 → 2/7 → ...)
-
-### Step 4 — Video slide
-- TED-Ed iframe should embed and be playable
-- Click "Continue →" to advance
-
-### Step 5 — MCQ 1 (standard question)
-- Select a wrong answer → click Submit → red "Not quite" feedback appears
-- Click "Try next question →"
-- (Or) select the correct answer → green "Correct!" feedback appears
-- Click "Keep going →"
-
-### Step 6 — MCQ 2 (role-play question)
-- Orange "Role play:" banner should appear above the question
-- Test correct and incorrect answers
-
-### Step 7 — Completion slide
-- Lottie parrot animation should play (from /public/animation.json)
-- "+50 XP" card should appear
-- "First Steps" badge card should appear
-- Click "Back to Dashboard →"
-
-### Step 8 — Verify database updated
-- Dashboard should show updated XP (was 0, now 50)
-- Lesson 1.1 should show "Done" / green state
-- Lesson 1.2 "Start →" button should now be available
-- In Neon SQL Editor: `SELECT total_xp, lessons_completed, badges FROM users WHERE clerk_id = 'your_id';`
-
-## Adding Level 2 lessons later
-
-When Anaaya has written the Level 2 scripts, add them to `lib/lesson-content.ts`:
-
-```ts
-export const LESSON_2_1: LessonContent = {
-  id: "l2-1",
-  // ... slides
-};
-
-export const LESSONS = {
-  "l1-1": LESSON_1_1,
-  "l1-2": LESSON_1_2,
-  "l1-3": LESSON_1_3,
-  "l1-4": LESSON_1_4,
-  "l2-1": LESSON_2_1,  // add here
-};
+In Neon SQL Editor, first find your Clerk user ID:
+```sql
+SELECT clerk_id, name FROM users;
 ```
 
-No other files need to change.
+Then set yourself as admin:
+```sql
+UPDATE users SET is_admin = TRUE WHERE clerk_id = 'user_YOUR_CLERK_ID_HERE';
+```
+
+## Step 3 — Add files to GitHub
+
+| File | Destination |
+|------|-------------|
+| `app/admin/layout.tsx` | `app/admin/layout.tsx` |
+| `app/admin/page.tsx` | `app/admin/page.tsx` |
+| `app/admin/lessons/page.tsx` | `app/admin/lessons/page.tsx` |
+| `app/admin/students/page.tsx` | `app/admin/students/page.tsx` |
+| `app/admin/settings/page.tsx` | `app/admin/settings/page.tsx` |
+| `app/api/admin/settings/route.ts` | `app/api/admin/settings/route.ts` |
+| `app/api/admin/users/route.ts` | `app/api/admin/users/route.ts` |
+| `components/admin/AdminSidebar.tsx` | `components/admin/AdminSidebar.tsx` |
+| `components/admin/AdminSettingsForm.tsx` | `components/admin/AdminSettingsForm.tsx` |
+| `lib/admin-auth.ts` | `lib/admin-auth.ts` |
+
+## Step 4 — Add to middleware
+
+Open `middleware.ts` and add `/admin` to the protected routes:
+
+```ts
+const isProtectedRoute = createRouteMatcher([
+  "/dashboard(.*)",
+  "/onboarding(.*)",
+  "/lessons(.*)",
+  "/admin(.*)",    // ← add this line
+]);
+```
+
+## Step 5 — Test
+
+Visit `your-url.vercel.app/admin`
+
+- If you set `is_admin = TRUE` for your account → you see the admin panel
+- If you visit as a non-admin student → redirected to /dashboard
+- If not signed in → redirected to /sign-in
+
+## What each page does
+
+| Page | URL | Description |
+|------|-----|-------------|
+| Overview | `/admin` | Stats: total students, active users, completions |
+| Lessons | `/admin/lessons` | List all lessons by level with Published/Pending status |
+| Students | `/admin/students` | Table of all students sorted by XP with progress bars |
+| Settings | `/admin/settings` | Toggle maintenance mode, announcements, allow sign-ups |
