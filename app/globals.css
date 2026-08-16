@@ -1,94 +1,98 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* ─── Brand CSS Variables ─── */
+/* ── PL 2.2 CSS Custom Properties ────────────────────────── */
 :root {
-  --brand-orange: #FF8200;
-  --brand-orange-l: #FFF0E0;
-  --brand-blue: #0252C9;
-  --brand-blue-l: #E8F0FC;
-  --brand-cream: #FFFDF7;
-  --brand-ink: #0F1023;
-  --brand-ink-soft: #4B5063;
+  /* Brand */
+  --brand-coral:   #FF5A5F;
+  --brand-yellow:  #FFB400;
+  --brand-blue:    #2A6FDB;
+  --brand-navy:    #0F172A;
+  --brand-cream:   #F8FAFC;
+
+  /* Legacy aliases */
+  --brand-orange:    #FF5A5F;
+  --brand-orange-l:  #FFFBEB;
+  --brand-blue-l:    #EFF6FF;
+
+  /* Text */
+  --ink:      #0F172A;
+  --ink-soft: #475569;
+  --mid:      #64748B;
+  --soft:     #94A3B8;
+
+  /* UI */
+  --ui-bg:     #F8FAFC;
+  --ui-card:   #FFFFFF;
+  --ui-border: #E2E8F0;
+  --pale:      #F1F5F9;
+  --cream:     #F8FAFC;
+  --white:     #FFFFFF;
+
+  /* States */
+  --state-correct-bg:     #ECFDF5;
+  --state-correct-border: #10B981;
+  --state-correct-text:   #047857;
+  --state-wrong-bg:       #FEF2F2;
+  --state-wrong-border:   #EF4444;
+  --state-wrong-text:     #B91C1C;
+  --state-active-bg:      #EFF6FF;
+  --state-active-border:  #2A6FDB;
+  --state-disabled-bg:    #E2E8F0;
+  --state-disabled-text:  #94A3B8;
+
+  /* Gamification */
+  --xp-bar-from: #FFB400;
+  --xp-bar-to:   #FF5A5F;
+  --streak-icon: #FF5A5F;
+  --badge-star:  #FFB400;
+  --done-check:  #10B981;
+
+  /* Age badge */
+  --age-badge-bg:     #FFFBEB;
+  --age-badge-border: #FFB400;
+  --age-badge-text:   #B45309;
 }
 
-/* ─── Tailwind v4 Theme Extension ─── */
-@theme {
-  /* Colours */
-  --color-brand-orange: #FF8200;
-  --color-brand-orange-l: #FFF0E0;
-  --color-brand-blue: #0252C9;
-  --color-brand-blue-l: #E8F0FC;
-  --color-cream: #FFFDF7;
-  --color-ink: #0F1023;
-  --color-ink-soft: #4B5063;
-
-  /* Fonts */
-  --font-display: "Baloo 2", system-ui, sans-serif;
-  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-baloo2: "Baloo 2", system-ui, sans-serif;
-  --font-plus-jakarta: "Plus Jakarta Sans", system-ui, sans-serif;
-
-  /* Shadows */
-  --shadow-orange: 0 8px 30px rgba(255, 130, 0, 0.35);
-  --shadow-card: 0 2px 12px rgba(15, 16, 35, 0.08);
-  --shadow-card-lg: 0 8px 32px rgba(15, 16, 35, 0.14);
-
-  /* Keyframes */
-  --animate-fade-up: fade-up 0.5s ease both;
-  --animate-fade-in: fade-in 0.4s ease both;
-  --animate-slide-in: slide-in 0.4s ease both;
-  --animate-bounce-soft: bounce-soft 2s ease-in-out infinite;
-  --animate-float: float 4s ease-in-out infinite;
-  --animate-float-delayed: float 4s ease-in-out 1s infinite;
-
-  @keyframes fade-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @keyframes slide-in {
-    from { opacity: 0; transform: translateX(-16px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes bounce-soft {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-10px); }
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-14px); }
-  }
+/* ── Base Resets ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-/* ─── Base ─── */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background-color: var(--brand-cream);
-  color: var(--brand-ink);
-  font-family: var(--font-plus-jakarta), system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  color: var(--ink);
 }
 
-/* ─── Animation delay utilities ─── */
-.delay-100  { animation-delay: 100ms; }
-.delay-200  { animation-delay: 200ms; }
-.delay-300  { animation-delay: 300ms; }
-.delay-400  { animation-delay: 400ms; }
-.delay-500  { animation-delay: 500ms; }
+/* ── Animation Delay Utilities ───────────────────────────── */
+@layer utilities {
+  .animation-delay-100 { animation-delay: 0.1s; }
+  .animation-delay-200 { animation-delay: 0.2s; }
+  .animation-delay-300 { animation-delay: 0.3s; }
+  .animation-delay-400 { animation-delay: 0.4s; }
+  .animation-delay-500 { animation-delay: 0.5s; }
 
-/* ─── Scroll reveal ─── */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  /* XP gradient bar utility */
+  .xp-gradient {
+    background: linear-gradient(to right, var(--xp-bar-from), var(--xp-bar-to));
+  }
 }
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--soft); border-radius: 3px; }
+
+/* ── Safe area for mobile bottom nav ────────────────────── */
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom);
 }
