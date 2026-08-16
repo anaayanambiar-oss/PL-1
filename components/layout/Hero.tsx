@@ -1,252 +1,191 @@
-"use client";
+import Link from "next/link";
 
-import Button from "@/components/ui/Button";
-
-function PhoneMockup() {
-  return (
-    <div className="relative flex items-center justify-center">
-      {/* Phone shell — floats gently */}
-      <div
-        className="relative w-[270px] h-[540px] bg-[#0F1023] rounded-[40px] shadow-[0_32px_80px_rgba(15,16,35,0.35)] p-3"
-        style={{ animation: "float 4s ease-in-out infinite" }}
-      >
-        {/* Notch */}
-        <div className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-5 bg-[#0F1023] rounded-full z-10" />
-
-        {/* Screen */}
-        <div className="w-full h-full bg-[#FFFDF7] rounded-[28px] overflow-hidden flex flex-col">
-          {/* App header bar */}
-          <div className="bg-[#0252C9] px-4 pt-8 pb-3 flex items-center justify-between">
-            <span
-              className="text-white font-extrabold text-sm"
-              style={{ fontFamily: "var(--font-baloo2)" }}
-            >
-              PoliticaLearn
-            </span>
-            <span className="flex items-center gap-1 bg-white/15 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
-              🔥 7
-            </span>
-          </div>
-
-          {/* Content */}
-          <div className="flex-1 px-3 py-3 overflow-hidden flex flex-col gap-3">
-            {/* Greeting */}
-            <p className="text-xs font-semibold text-[#0F1023] leading-snug">
-              Hi Arjun! Ready to learn? 🌟
-            </p>
-
-            {/* Level 1 progress */}
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] font-semibold text-[#4B5063] uppercase tracking-wide">
-                  Level 1
-                </span>
-                <span className="text-[10px] text-[#4B5063]">45%</span>
-              </div>
-              <div className="h-2 w-full bg-[#E8F0FC] rounded-full overflow-hidden">
-                <div
-                  className="h-full rounded-full"
-                  style={{
-                    width: "45%",
-                    background: "linear-gradient(90deg, #FF8200, #0252C9)",
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Lesson cards */}
-            <div className="flex flex-col gap-1.5">
-              {[
-                { icon: "✅", label: "Done", title: "What is Govt?", color: "bg-green-50 border-green-200" },
-                { icon: "📜", label: "Now", title: "India's Constitution", color: "bg-[#E8F0FC] border-[#0252C9]/20" },
-                { icon: "🔒", label: "Locked", title: "Your Rights", color: "bg-gray-50 border-gray-200" },
-              ].map((card) => (
-                <div
-                  key={card.title}
-                  className={`flex items-center gap-2 p-2 rounded-xl border ${card.color}`}
-                >
-                  <span className="text-base leading-none">{card.icon}</span>
-                  <div>
-                    <span className="text-[9px] font-bold uppercase tracking-wide text-[#4B5063]">
-                      {card.label}
-                    </span>
-                    <p className="text-[11px] font-semibold text-[#0F1023] leading-tight">
-                      {card.title}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* MCQ sample */}
-            <div className="bg-white rounded-xl border border-black/[0.08] p-2.5">
-              <p className="text-[10px] font-semibold text-[#0F1023] mb-2 leading-snug">
-                Who wrote India&apos;s Constitution?
-              </p>
-              <div className="flex flex-col gap-1">
-                {[
-                  { text: "Jawaharlal Nehru", correct: false },
-                  { text: "B.R. Ambedkar", correct: true },
-                  { text: "Mahatma Gandhi", correct: false },
-                ].map((opt) => (
-                  <div
-                    key={opt.text}
-                    className={[
-                      "text-[10px] font-medium px-2 py-1 rounded-lg border",
-                      opt.correct
-                        ? "bg-[#E8F0FC] border-[#0252C9]/30 text-[#0252C9]"
-                        : "bg-gray-50 border-gray-200 text-[#4B5063]",
-                    ].join(" ")}
-                  >
-                    {opt.correct && "✓ "}{opt.text}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Floating badge — top right */}
-      <div
-        className="absolute -top-4 -right-4 bg-white rounded-2xl shadow-[0_8px_32px_rgba(15,16,35,0.14)] border border-black/[0.06] px-3 py-2.5 max-w-[160px]"
-        style={{ animation: "float 4s ease-in-out 0.5s infinite" }}
-      >
-        <div className="flex items-center gap-2">
-          <span className="text-xl">🏆</span>
-          <div>
-            <p className="text-xs font-bold text-[#0F1023] leading-tight">Level 1 Complete!</p>
-            <p className="text-[11px] text-[#FF8200] font-semibold">+200 XP earned</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Floating badge — bottom left */}
-      <div
-        className="absolute -bottom-4 -left-6 bg-white rounded-2xl shadow-[0_8px_32px_rgba(15,16,35,0.14)] border border-black/[0.06] px-3 py-2.5 max-w-[160px]"
-        style={{ animation: "float 4s ease-in-out 1.5s infinite" }}
-      >
-        <div className="flex items-center gap-2">
-          <span className="text-xl">🔥</span>
-          <div>
-            <p className="text-xs font-bold text-[#0F1023] leading-tight">7-day streak</p>
-            <p className="text-[11px] text-[#4B5063]">Keep it going!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+const stats = [
+  { num: "3",    label: "Learning Levels" },
+  { num: "15+",  label: "Lessons" },
+  { num: "100%", label: "Free to Access" },
+];
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+    <section className="min-h-screen pt-16 grid md:grid-cols-2 items-center
+                        relative overflow-hidden bg-brand-cream">
+
       {/* Background blobs */}
-      <div
-        className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(255,130,0,0.10) 0%, transparent 70%)" }}
-      />
-      <div
-        className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(2,82,201,0.08) 0%, transparent 70%)" }}
-      />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full
+                        bg-brand-coral/8 blur-[100px]" />
+        <div className="absolute -bottom-12 right-0 w-[400px] h-[400px] rounded-full
+                        bg-brand-blue/8 blur-[80px]" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left column */}
-          <div className="flex flex-col gap-6">
-            {/* Badge pill */}
-            <div
-              className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full border border-[#FF8200]/40 bg-[#FFF0E0] text-[11px] font-bold uppercase tracking-wider text-[#FF8200]"
-              style={{ animation: "fade-up 0.5s ease both", animationDelay: "0ms" }}
-            >
-              🇮🇳 For Indian Kids · Ages 7–13
+      {/* Dot pattern */}
+      <div className="absolute right-0 top-16 w-1/2 h-full opacity-40
+                      pointer-events-none hidden md:block"
+           style={{
+             backgroundImage: "radial-gradient(circle, rgba(42,111,219,0.12) 1.5px, transparent 1.5px)",
+             backgroundSize: "28px 28px",
+           }} />
+
+      {/* ── Left content ── */}
+      <div className="relative z-10 px-6 md:px-20 py-20 md:py-28 flex flex-col gap-6">
+
+        {/* Age badge */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full
+                        bg-age-badge-bg border border-age-badge-border w-fit
+                        animate-fade-up">
+          <span>🇮🇳</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-age-badge-text">
+            For Indian Kids · Ages 7–13
+          </span>
+        </div>
+
+        {/* Headline */}
+        <h1 className="font-display font-extrabold
+                       text-[clamp(40px,5.5vw,72px)] leading-[1.05]
+                       tracking-tight animate-fade-up animation-delay-100">
+          <span className="text-brand-navy">Learn.</span><br />
+          <span className="text-brand-blue">Lead.</span><br />
+          <span className="relative inline-block text-brand-coral">
+            Change.
+            {/* Yellow tint highlight box behind "Change." */}
+            <span className="absolute inset-0 -z-10 rounded-md bg-[#FFFBEB] scale-x-105 scale-y-90" />
+          </span>
+        </h1>
+
+        {/* Subheading */}
+        <p className="text-[17px] leading-relaxed text-ink-soft max-w-[460px]
+                      animate-fade-up animation-delay-200">
+          The first civics platform built for Indian children. Learn how your
+          government works, why your vote matters — and how{" "}
+          <em>you</em> can shape the world around you.
+        </p>
+
+        {/* CTAs */}
+        <div className="flex items-center gap-4 flex-wrap animate-fade-up animation-delay-300">
+          <a href="#signup"
+             className="px-8 py-4 rounded-full bg-brand-coral text-white font-bold
+                        text-base shadow-coral hover:-translate-y-1 hover:shadow-lg
+                        transition-all duration-200 flex items-center gap-2">
+            🎓 Start for Free
+          </a>
+          <a href="#curriculum"
+             className="px-7 py-4 rounded-full border-2 border-brand-blue text-brand-blue
+                        font-semibold text-base bg-white
+                        hover:bg-brand-blue hover:text-white
+                        transition-all duration-200 flex items-center gap-2">
+            ▶ See the Curriculum
+          </a>
+        </div>
+
+        {/* Stats */}
+        <div className="flex gap-8 pt-2 animate-fade-up animation-delay-400">
+          {stats.map((s) => (
+            <div key={s.label} className="flex flex-col">
+              <span className="font-display font-black text-3xl text-brand-navy tracking-tight">
+                {s.num}
+              </span>
+              <span className="text-xs font-medium text-mid mt-0.5">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Right: Phone mockup ── */}
+      <div className="relative z-10 hidden md:flex items-center justify-center py-20 px-10">
+
+        {/* Floating badges */}
+        <div className="absolute top-[15%] right-4 bg-white rounded-2xl shadow-card-lg
+                        px-3.5 py-2.5 flex items-center gap-2.5
+                        border border-ui-border animate-bounce-soft">
+          <span className="text-2xl">🏆</span>
+          <div>
+            <p className="text-sm font-bold text-brand-navy leading-tight">Level 1 Complete!</p>
+            <p className="text-xs text-mid">+200 XP earned</p>
+          </div>
+        </div>
+
+        <div className="absolute bottom-[22%] left-4 bg-white rounded-2xl shadow-card-lg
+                        px-3.5 py-2.5 flex items-center gap-2.5
+                        border border-ui-border animate-bounce-soft animation-delay-300">
+          <span className="text-2xl text-streak-icon">🔥</span>
+          <div>
+            <p className="text-sm font-bold text-brand-navy leading-tight">7-day streak</p>
+            <p className="text-xs text-mid">Keep it going!</p>
+          </div>
+        </div>
+
+        {/* Phone shell */}
+        <div className="w-[280px] bg-brand-navy rounded-[40px] p-3.5
+                        shadow-[0_32px_80px_rgba(15,23,42,0.35)]
+                        animate-bounce-soft animation-delay-100">
+          <div className="bg-brand-cream rounded-[28px] overflow-hidden">
+
+            {/* App header */}
+            <div className="bg-brand-blue px-4 pt-10 pb-3
+                            flex items-center justify-between">
+              <span className="font-display font-extrabold text-white text-sm">
+                PoliticaLearn
+              </span>
+              <div className="flex items-center gap-1 bg-white/20 px-2.5 py-1 rounded-full">
+                <span className="text-xs">🔥</span>
+                <span className="text-xs font-bold text-white">7</span>
+              </div>
             </div>
 
-            {/* Headline */}
-            <div
-              className="flex flex-col"
-              style={{ animation: "fade-up 0.5s ease both", animationDelay: "100ms" }}
-            >
-              <h1
-                className="text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight"
-                style={{ fontFamily: "var(--font-baloo2)" }}
-              >
-                <span className="block text-[#0F1023]">Learn.</span>
-                <span className="block text-[#0252C9]">Lead.</span>
-                <span className="relative block text-[#FF8200]">
-                  {/* Highlight bar */}
-                  <span
-                    className="absolute inset-y-1 inset-x-0 rounded-lg pointer-events-none"
-                    style={{ background: "rgba(255,130,0,0.10)" }}
-                  />
-                  <span className="relative">Change.</span>
-                </span>
-              </h1>
-            </div>
+            {/* App body */}
+            <div className="px-3.5 py-3">
+              <p className="font-display font-bold text-sm text-brand-navy mb-2.5">
+                Hi Arjun! Ready to learn? 🌟
+              </p>
 
-            {/* Subheading */}
-            <p
-              className="text-base lg:text-lg text-[#4B5063] leading-relaxed max-w-[460px]"
-              style={{ animation: "fade-up 0.5s ease both", animationDelay: "200ms" }}
-            >
-              The first civics platform built for Indian children. Learn how your government works,
-              why your vote matters — and how you can shape the world around you.
-            </p>
+              {/* XP bar */}
+              <p className="text-[10px] font-semibold text-mid uppercase tracking-wider mb-1">
+                Level 1 Progress
+              </p>
+              <div className="h-2.5 bg-ui-border rounded-full overflow-hidden mb-3.5">
+                <div className="h-full w-[45%] rounded-full xp-gradient" />
+              </div>
 
-            {/* CTA buttons */}
-            <div
-              className="flex flex-wrap gap-3"
-              style={{ animation: "fade-up 0.5s ease both", animationDelay: "300ms" }}
-            >
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={() => { window.location.href = "/sign-up"; }}
-              >
-                🎓 Start for Free
-              </Button>
-              <Button variant="outline" size="lg">
-                ▶ See the Curriculum
-              </Button>
-            </div>
-
-            {/* Stats row */}
-            <div
-              className="flex items-center gap-8 pt-2"
-              style={{ animation: "fade-up 0.5s ease both", animationDelay: "400ms" }}
-            >
+              {/* Lesson cards */}
               {[
-                { num: "3", label: "Learning Levels" },
-                { num: "15+", label: "Lessons" },
-                { num: "100%", label: "Free to Access" },
-              ].map((stat, i) => (
-                <div key={stat.label} className="flex flex-col">
-                  <span
-                    className="text-2xl font-black text-[#0F1023]"
-                    style={{ fontFamily: "var(--font-baloo2)" }}
-                  >
-                    {stat.num}
+                { icon:"✅", title:"What is a Government?", sub:"Lesson 1 · 3 min",
+                  badge:"Done",   badgeCls:"text-done-check bg-state-correct-bg",  active:false },
+                { icon:"📜", title:"Why Do We Have Rules?", sub:"Lesson 2 · 4 min",
+                  badge:"Now",    badgeCls:"text-brand-coral bg-brand-orange-l",   active:true  },
+                { icon:"🔒", title:"How India's Govt Works", sub:"Lesson 3 · 5 min",
+                  badge:"Locked", badgeCls:"text-soft bg-pale",                    active:false },
+              ].map((l) => (
+                <div key={l.title}
+                  className={`flex items-center gap-2.5 p-2.5 rounded-xl mb-2
+                              border bg-white
+                              ${l.active ? "border-brand-coral" : "border-ui-border"}`}>
+                  <div className="w-9 h-9 rounded-lg bg-pale flex items-center
+                                  justify-center text-lg flex-shrink-0">
+                    {l.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[11px] font-bold text-brand-navy truncate">{l.title}</p>
+                    <p className="text-[10px] text-mid">{l.sub}</p>
+                  </div>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${l.badgeCls}`}>
+                    {l.badge}
                   </span>
-                  <span className="text-xs text-[#4B5063] font-medium">{stat.label}</span>
-                  {i < 2 && <div className="hidden" />}
                 </div>
               ))}
-            </div>
-          </div>
 
-          {/* Right column — phone mockup (hidden on mobile) */}
-          <div className="hidden md:flex justify-center items-center relative">
-            {/* Dot grid background — right side only */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle, rgba(2,82,201,0.12) 1.5px, transparent 1.5px)",
-                backgroundSize: "28px 28px",
-              }}
-            />
-            <PhoneMockup />
+              {/* MCQ preview */}
+              <div className="mt-2.5 bg-white rounded-xl p-2.5 border border-ui-border">
+                <p className="text-[10px] font-bold text-brand-navy mb-1.5">
+                  What does a government mainly do?
+                </p>
+                <div className="text-[10px] px-2 py-1.5 rounded-lg bg-state-active-bg
+                                border border-state-active-border
+                                text-brand-blue font-bold">
+                  A) Makes and enforces rules ✓
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

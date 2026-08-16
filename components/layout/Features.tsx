@@ -1,74 +1,47 @@
+// components/layout/Features.tsx
 const features = [
-  {
-    accent: "border-t-[#0252C9]",
-    emoji: "🎮",
-    title: "Gamified Levels",
-    desc: "Three progressive levels take students from basic concepts to active citizenship. Each level unlocks as the previous one is mastered.",
-    hoverBorder: "hover:border-t-[#0252C9]",
-  },
-  {
-    accent: "border-t-[#FF8200]",
-    emoji: "🔥",
-    title: "Daily Streaks",
-    desc: "A streak counter rewards consistent learning. One lesson per day keeps the streak alive and builds the habit.",
-    hoverBorder: "hover:border-t-[#FF8200]",
-  },
-  {
-    accent: "border-t-[#FF8200]",
-    emoji: "🎬",
-    title: "Short Videos",
-    desc: "Every lesson includes a curated 2–4 minute video — sourced from TED-Ed or recorded for Indian students.",
-    hoverBorder: "hover:border-t-[#FF8200]",
-  },
-  {
-    accent: "border-t-[#0252C9]",
-    emoji: "📊",
-    title: "Personal Dashboard",
-    desc: "Each student has a private dashboard showing progress, scores, and their recommended next step.",
-    hoverBorder: "hover:border-t-[#0252C9]",
-  },
+  { emoji:"🎮", title:"Gamified Levels",    accent:"border-t-brand-blue",
+    desc:"Three progressive levels take students from basic concepts to active citizenship. Each level unlocks as the previous one is mastered." },
+  { emoji:"🔥", title:"Daily Streaks",      accent:"border-t-brand-coral",
+    desc:"A streak counter rewards consistent learning. One lesson per day keeps the streak alive and builds the habit of staying informed." },
+  { emoji:"🎬", title:"Short Videos",       accent:"border-t-brand-yellow",
+    desc:"Every lesson includes a curated 2–4 minute video — sourced from TED-Ed or recorded specifically for Indian students." },
+  { emoji:"📊", title:"Personal Dashboard", accent:"border-t-brand-blue",
+    desc:"Each student has a private dashboard showing what they have completed, their scores, and their recommended next step." },
 ];
 
 export default function Features() {
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-        {/* Left — copy */}
-        <div className="flex flex-col gap-5 lg:sticky lg:top-28">
-          <span className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full bg-[#E8F0FC] text-[#0252C9] text-xs font-bold uppercase tracking-wider">
-            ✦ Features
-          </span>
-          <h2
-            className="text-3xl lg:text-4xl font-black text-[#0F1023] leading-tight"
-            style={{ fontFamily: "var(--font-baloo2)" }}
-          >
+    <section id="features" className="max-w-6xl mx-auto px-6 py-24">
+      <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full
+                          bg-state-active-bg border border-state-active-border mb-4">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-blue">
+              ✦ Features
+            </span>
+          </div>
+          <h2 className="font-display font-black text-[clamp(28px,4vw,48px)] leading-tight
+                         tracking-tight text-brand-navy mb-4">
             Built to keep kids coming back
           </h2>
-          <p className="text-base text-[#4B5063] leading-relaxed max-w-sm">
-            PoliticaLearn borrows the best engagement mechanics from games and language apps — and
-            applies them to civics. Learning feels like play.
+          <p className="text-ink-soft text-base leading-relaxed max-w-md">
+            PoliticaLearn borrows the best engagement mechanics from games and language apps —
+            and applies them to civics. Learning feels like play.
           </p>
         </div>
-
-        {/* Right — 2×2 card grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-4">
           {features.map((f) => (
-            <div
-              key={f.title}
-              className={[
-                "bg-white rounded-2xl border border-black/[0.08] border-t-4 p-6",
-                "transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(15,16,35,0.14)]",
-                f.accent,
-              ].join(" ")}
-            >
-              <span className="text-3xl leading-none block mb-3">{f.emoji}</span>
-              <h3
-                className="text-base font-bold text-[#0F1023] mb-1.5"
-                style={{ fontFamily: "var(--font-baloo2)" }}
-              >
+            <div key={f.title}
+              className={`bg-ui-card rounded-2xl p-6 border border-ui-border
+                          border-t-4 ${f.accent}
+                          hover:-translate-y-1 hover:shadow-card-lg
+                          transition-all duration-200 cursor-default`}>
+              <div className="text-3xl mb-3">{f.emoji}</div>
+              <h3 className="font-display font-bold text-base text-brand-navy mb-1.5">
                 {f.title}
               </h3>
-              <p className="text-sm text-[#4B5063] leading-relaxed">{f.desc}</p>
+              <p className="text-sm text-ink-soft leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
