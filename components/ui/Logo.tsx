@@ -13,24 +13,21 @@ export default function Logo({ variant = "default", size = "md" }: LogoProps) {
     lg: { mark: "w-10 h-10 text-xl", wordmark: "text-2xl" },
   };
 
-  const inkColor = variant === "white" ? "text-white" : "text-[#0F1023]";
-  const blueColor = variant === "white" ? "text-white" : "text-[#0252C9]";
+  const inkColor = variant === "white" ? "text-white" : "text-brand-navy";
+  const blueColor = variant === "white" ? "text-brand-yellow" : "text-brand-blue";
 
   return (
     <div className="flex items-center gap-2.5">
       {/* Gradient mark */}
       <div
-        className={`${sizeMap[size].mark} rounded-xl bg-gradient-to-br from-[#0252C9] to-[#FF8200] flex items-center justify-center flex-shrink-0`}
+        className={`${sizeMap[size].mark} rounded-xl bg-gradient-to-br from-brand-blue to-brand-coral flex items-center justify-center flex-shrink-0`}
       >
-        <span className="font-black text-white leading-none" style={{ fontFamily: "var(--font-baloo2)" }}>
-          P
-        </span>
+        <span className="font-display font-black text-white leading-none">P</span>
       </div>
 
       {/* Wordmark */}
       <span
-        className={`${sizeMap[size].wordmark} font-extrabold leading-none tracking-tight`}
-        style={{ fontFamily: "var(--font-baloo2)" }}
+        className={`font-display ${sizeMap[size].wordmark} font-extrabold leading-none tracking-tight`}
       >
         <span className={inkColor}>Politica</span>
         <span className={blueColor}>Learn</span>

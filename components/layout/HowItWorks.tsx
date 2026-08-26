@@ -1,9 +1,13 @@
 // components/layout/HowItWorks.tsx
 const steps = [
-  { icon:"🔍", title:"Discover",      desc:"A parent or student finds PoliticaLearn. No sign-up required to explore the content." },
-  { icon:"🎒", title:"Sign Up Free",  desc:"One-click with Google. A short onboarding asks the student's name and age." },
-  { icon:"📚", title:"Learn by Doing",desc:"Each lesson combines explanation slides, a short video, a real Indian example, and MCQs." },
-  { icon:"🌟", title:"Earn & Level Up",desc:"Complete lessons to earn badges and XP. A dashboard tracks every milestone." },
+  { icon:"🔍", title:"Explore",
+    desc:"No sign-up needed. Browse a few lessons, see what PoliticaLearn feels like, decide if it clicks." },
+  { icon:"🎒", title:"Join in Under a Minute",
+    desc:"One tap with Google. Tell us a name and age — that’s the whole form." },
+  { icon:"📚", title:"Learn Like It’s a Game",
+    desc:"Every lesson: a quick video, a real Indian example, and questions that make you think, not memorize." },
+  { icon:"🌟", title:"Level Up",
+    desc:"Badges, XP, and a streak that doesn’t want to be broken. Progress you can actually see." },
 ];
 
 export default function HowItWorks() {
@@ -18,8 +22,8 @@ export default function HowItWorks() {
         </span>
       </div>
       <h2 className="font-display font-black text-[clamp(28px,4vw,48px)] text-white
-                     leading-tight tracking-tight mb-3 max-w-lg">
-        From curious kid to informed citizen
+                     leading-tight tracking-tight mb-3 max-w-2xl">
+        From “what’s a government?” to “I get it now”
       </h2>
       <p className="text-white/60 text-base leading-relaxed mb-14 max-w-xl">
         PoliticaLearn uses the same psychology as Duolingo — short lessons, instant rewards,
@@ -31,7 +35,7 @@ export default function HowItWorks() {
             <div className="text-3xl mb-4">{s.icon}</div>
             <div className="font-display font-extrabold text-brand-yellow text-sm
                             uppercase tracking-wider mb-2">
-              {String(i + 1).padStart(2, "0")}
+              Step {String(i + 1).padStart(2, "0")}
             </div>
             <h3 className="font-display font-bold text-white text-lg mb-2">{s.title}</h3>
             <p className="text-white/55 text-sm leading-relaxed">{s.desc}</p>

@@ -2,10 +2,10 @@ import Logo from "@/components/ui/Logo";
 
 const footerLinks = {
   Platform: [
-    { label: "How it works", href: "#how-it-works" },
+    { label: "How it works", href: "#how" },
     { label: "Curriculum", href: "#curriculum" },
     { label: "Features", href: "#features" },
-    { label: "Sign Up Free", href: "#" },
+    { label: "Sign Up Free", href: "/sign-up" },
   ],
   About: [
     { label: "Our Mission", href: "/about/mission" },
@@ -22,7 +22,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0F1023]">
+    <footer className="bg-brand-navy">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         {/* Main grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 pb-12">
@@ -37,10 +37,7 @@ export default function Footer() {
           {/* Link columns */}
           {Object.entries(footerLinks).map(([section, links]) => (
             <div key={section} className="flex flex-col gap-3">
-              <h4
-                className="text-xs font-bold text-white uppercase tracking-widest mb-1"
-                style={{ fontFamily: "var(--font-baloo2)" }}
-              >
+              <h4 className="font-display text-xs font-bold text-white uppercase tracking-widest mb-1">
                 {section}
               </h4>
               <ul className="flex flex-col gap-2.5">

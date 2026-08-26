@@ -1,13 +1,13 @@
 // components/layout/Features.tsx
 const features = [
-  { emoji:"🎮", title:"Gamified Levels",    accent:"border-t-brand-blue",
-    desc:"Three progressive levels take students from basic concepts to active citizenship. Each level unlocks as the previous one is mastered." },
-  { emoji:"🔥", title:"Daily Streaks",      accent:"border-t-brand-coral",
-    desc:"A streak counter rewards consistent learning. One lesson per day keeps the streak alive and builds the habit of staying informed." },
-  { emoji:"🎬", title:"Short Videos",       accent:"border-t-brand-yellow",
-    desc:"Every lesson includes a curated 2–4 minute video — sourced from TED-Ed or recorded specifically for Indian students." },
-  { emoji:"📊", title:"Personal Dashboard", accent:"border-t-brand-blue",
-    desc:"Each student has a private dashboard showing what they have completed, their scores, and their recommended next step." },
+  { emoji:"🎮", title:"Levels That Unlock", accent:"border-t-brand-blue",
+    desc:"No wall of content on day one. Three levels, each one earned — so there’s always a next thing to reach for." },
+  { emoji:"🔥", title:"Streaks Kids Actually Care About", accent:"border-t-brand-coral",
+    desc:"One short lesson a day is enough to keep the flame lit. Miss a day, feel it. Come back, get it going again." },
+  { emoji:"🎬", title:"Videos Under 4 Minutes", accent:"border-t-brand-yellow",
+    desc:"Attention spans are real. Every video is short, sharp, and either from TED-Ed or shot specifically for Indian students." },
+  { emoji:"📊", title:"A Dashboard That’s Actually Theirs", accent:"border-t-brand-blue",
+    desc:"Every student gets their own progress screen — scores, streaks, and what to learn next, without digging." },
 ];
 
 export default function Features() {
@@ -23,11 +23,11 @@ export default function Features() {
           </div>
           <h2 className="font-display font-black text-[clamp(28px,4vw,48px)] leading-tight
                          tracking-tight text-brand-navy mb-4">
-            Built to keep kids coming back
+            The kind of app kids open on their own
           </h2>
           <p className="text-ink-soft text-base leading-relaxed max-w-md">
-            PoliticaLearn borrows the best engagement mechanics from games and language apps —
-            and applies them to civics. Learning feels like play.
+            PoliticaLearn steals the tricks from the games your kids play and points them at
+            civics. Learning that doesn’t feel like “homework”.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4">

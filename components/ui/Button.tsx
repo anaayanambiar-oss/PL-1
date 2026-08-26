@@ -1,24 +1,17 @@
-import { ButtonHTMLAttributes, forwardRef } from "react";
+import Link from "next/link";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 
 type Variant = "primary" | "secondary" | "outline" | "ghost";
 type Size = "sm" | "md" | "lg";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: Variant;
-  size?: Size;
-  href?: string;
-  asChild?: boolean;
-}
-
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-[#FF8200] text-white shadow-[0_8px_30px_rgba(255,130,0,0.35)] hover:shadow-[0_10px_36px_rgba(255,130,0,0.45)] hover:-translate-y-px active:translate-y-0",
+    "bg-brand-coral text-white shadow-coral hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0",
   secondary:
-    "bg-[#0252C9] text-white shadow-[0_4px_16px_rgba(2,82,201,0.3)] hover:shadow-[0_6px_22px_rgba(2,82,201,0.4)] hover:-translate-y-px",
+    "bg-brand-blue text-white shadow-blue hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0",
   outline:
-    "bg-transparent border border-black/10 text-[#0F1023] hover:border-[#0252C9] hover:text-[#0252C9]",
-  ghost:
-    "bg-transparent text-[#0F1023] hover:bg-black/5",
+    "bg-white border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white",
+  ghost: "bg-transparent text-brand-navy hover:bg-brand-navy/5",
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -27,29 +20,61 @@ const sizeClasses: Record<Size, string> = {
   lg: "px-8 py-4 text-base",
 };
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = "primary", size = "md", className = "", children, ...props }, ref) => {
+export function buttonClasses(
+  variant: Variant = "primary",
+  size: Size = "md",
+  className = ""
+) {
+  return [
+    "inline-flex items-center justify-center gap-2 rounded-full font-bold",
+    "transition-all duration-200 cursor-pointer select-none",
+    "focus-visible:outline-2 focus-visible:outline-brand-blue focus-visible:outline-offset-2",
+    "disabled:opacity-50 disabled:pointer-events-none",
+    variantClasses[variant],
+    sizeClasses[size],
+    className,
+  ]
+    .join(" ")
+    .trim();
+}
+
+type SharedProps = {
+  variant?: Variant;
+  size?: Size;
+  className?: string;
+  children?: ReactNode;
+};
+
+type ButtonAsButton = SharedProps &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> & { href?: never };
+
+type ButtonAsLink = SharedProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "className" | "href"> & {
+    href: string;
+  };
+
+type ButtonProps = ButtonAsButton | ButtonAsLink;
+
+// Renders an anchor when `href` is given so CTAs are real links — keyboard
+// focusable, middle-clickable, and crawlable — instead of buttons that push
+// window.location in an onClick handler.
+export default function Button(props: ButtonProps) {
+  const { variant = "primary", size = "md", className = "", children } = props;
+  const classes = buttonClasses(variant, size, className);
+
+  if ("href" in props && props.href !== undefined) {
+    const { href, variant: _v, size: _s, className: _c, children: _ch, ...rest } = props;
     return (
-      <button
-        ref={ref}
-        className={[
-          "inline-flex items-center justify-center gap-2 rounded-full font-semibold",
-          "transition-all duration-200 cursor-pointer select-none",
-          "focus-visible:outline-2 focus-visible:outline-[#0252C9] focus-visible:outline-offset-2",
-          "disabled:opacity-50 disabled:pointer-events-none",
-          variantClasses[variant],
-          sizeClasses[size],
-          className,
-        ]
-          .join(" ")
-          .trim()}
-        {...props}
-      >
+      <Link href={href} className={classes} {...rest}>
         {children}
-      </button>
+      </Link>
     );
   }
-);
 
-Button.displayName = "Button";
-export default Button;
+  const { variant: _v, size: _s, className: _c, children: _ch, href: _h, ...rest } = props;
+  return (
+    <button className={classes} {...rest}>
+      {children}
+    </button>
+  );
+}

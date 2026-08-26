@@ -1,44 +1,45 @@
+// Saturated brand fills. Each card's text colour is dictated by contrast against
+// its own fill (see COLOUR_GUIDE.md): white clears AA on brand-blue only, while
+// brand-yellow and brand-coral need brand-navy. Don't swap these independently.
 const audiences = [
   {
-    emoji: "🧒",
     title: "Students (7–13)",
-    bg: "bg-[#E8F0FC]",
-    border: "border-[#0252C9]/20",
-    titleColor: "text-[#0252C9]",
-    desc: "Short, game-like lessons that make civics feel like an adventure. No boring textbooks — just real concepts in plain language with Indian examples.",
+    bg: "bg-brand-blue",
+    border: "border-[#245FBE]",
+    titleColor: "text-white",
+    bodyColor: "text-white",
+    desc: "Bite-sized lessons that feel like leveling up in a game, not another textbook chapter. Real Indian examples, zero jargon.",
   },
   {
-    emoji: "👨‍👩‍👧",
     title: "Parents",
-    bg: "bg-[#FFF0E0]",
-    border: "border-[#FF8200]/25",
-    titleColor: "text-[#FF8200]",
-    desc: "A safe, free, ad-free platform where children learn something genuinely useful. Progress is visible on the student's dashboard.",
+    bg: "bg-brand-yellow",
+    border: "border-[#E09E00]",
+    titleColor: "text-brand-navy",
+    bodyColor: "text-brand-navy",
+    desc: "A safe, ad-free space where your kid learns something that actually matters. Check their dashboard anytime — no guessing what they’re up to.",
   },
   {
-    emoji: "🏫",
     title: "Teachers",
-    bg: "bg-rose-50",
-    border: "border-rose-200",
-    titleColor: "text-rose-600",
-    desc: "A supplementary resource that fills the civic education gap left by standard curricula. Assign a level as a weekly activity.",
+    bg: "bg-brand-coral",
+    border: "border-[#F0454A]",
+    titleColor: "text-brand-navy",
+    bodyColor: "text-brand-navy",
+    desc: "The civics gap standard curricula leave behind, solved. Assign a level as homework or a weekly activity, no lesson planning required.",
   },
 ];
 
 export default function AudienceSection() {
   return (
-    <section className="bg-white py-20">
+    // id="who" is the target of the navbar's "Who it's for" link.
+    <section id="who" className="bg-white py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col items-center text-center gap-4 mb-14">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F0FC] text-[#0252C9] text-xs font-bold uppercase tracking-wider">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-state-active-bg border border-state-active-border text-brand-blue text-xs font-bold uppercase tracking-wider">
             ✦ Who It&apos;s For
           </span>
-          <h2
-            className="text-3xl lg:text-4xl font-black text-[#0F1023] max-w-lg leading-tight"
-            style={{ fontFamily: "var(--font-baloo2)" }}
-          >
-            Built for everyone in the classroom and at home
+          <h2 className="font-display text-3xl lg:text-4xl font-black text-brand-navy max-w-xl leading-tight">
+            Made for the whole civics-curious household
           </h2>
         </div>
 
@@ -47,19 +48,16 @@ export default function AudienceSection() {
             <div
               key={a.title}
               className={[
-                "rounded-3xl p-8 border transition-all duration-200 hover:-translate-y-1",
+                "rounded-3xl p-8 border transition-all duration-200",
+                "hover:-translate-y-1 hover:shadow-card-lg",
                 a.bg,
                 a.border,
               ].join(" ")}
             >
-              <span className="text-5xl block mb-4">{a.emoji}</span>
-              <h3
-                className={`text-xl font-bold mb-3 ${a.titleColor}`}
-                style={{ fontFamily: "var(--font-baloo2)" }}
-              >
+              <h3 className={`font-display text-xl font-bold mb-3 ${a.titleColor}`}>
                 {a.title}
               </h3>
-              <p className="text-sm text-[#4B5063] leading-relaxed">{a.desc}</p>
+              <p className={`text-sm leading-relaxed ${a.bodyColor}`}>{a.desc}</p>
             </div>
           ))}
         </div>

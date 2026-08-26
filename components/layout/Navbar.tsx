@@ -3,10 +3,10 @@ import Link from "next/link";
 import { useState } from "react";
 
 const navLinks = [
-  { label: "How it works", href: "#how" },
-  { label: "Curriculum",   href: "#curriculum" },
-  { label: "Features",     href: "#features" },
-  { label: "About",        href: "#about" },
+  { label: "How it works",  href: "#how" },
+  { label: "Curriculum",    href: "#curriculum" },
+  { label: "Features",      href: "#features" },
+  { label: "Who it's for",  href: "#who" },
 ];
 
 export default function Navbar() {
@@ -51,7 +51,10 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button className="md:hidden p-2 rounded-lg hover:bg-pale transition-colors"
-                onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label="Toggle menu"
+                aria-expanded={menuOpen}
+                aria-controls="mobile-menu">
           <div className="w-5 h-0.5 bg-brand-navy mb-1" />
           <div className="w-5 h-0.5 bg-brand-navy mb-1" />
           <div className="w-5 h-0.5 bg-brand-navy" />
@@ -60,7 +63,8 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-brand-cream border-t border-brand-navy/[0.07] px-6 pb-4">
+        <div id="mobile-menu"
+             className="md:hidden bg-brand-cream border-t border-brand-navy/[0.07] px-6 pb-4">
           {navLinks.map((l) => (
             <a key={l.href} href={l.href}
                className="block py-3 text-sm font-medium text-ink-soft
@@ -71,7 +75,8 @@ export default function Navbar() {
           ))}
           <a href="#signup"
              className="mt-4 block text-center px-5 py-3 rounded-full
-                        bg-brand-coral text-white text-sm font-bold">
+                        bg-brand-coral text-white text-sm font-bold"
+             onClick={() => setMenuOpen(false)}>
             Start for Free →
           </a>
         </div>

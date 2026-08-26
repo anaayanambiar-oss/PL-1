@@ -3,23 +3,23 @@ export default function StatBanner() {
     {
       num: "40%",
       label:
-        "of young adults cannot answer basic civics questions — the gap starts early",
+        "of Indian teens can’t name their own MP — civics is the one subject school forgets to teach",
     },
     {
       num: "7–13",
       label:
-        "the age window when civic identity is formed and when it matters most to teach it",
+        "the exact age when kids start asking “why do we even have rules?” Why not answer them?",
     },
     {
       num: "₹0",
       label:
-        "cost to any student — PoliticaLearn is free for every child, regardless of background",
+        "forever free. Every Indian kid deserves to understand the country they’ll one day vote in",
     },
   ];
 
   return (
     <section className="px-4 sm:px-6 lg:px-10 py-8">
-      <div className="bg-[#0F1023] rounded-[32px] max-w-7xl mx-auto overflow-hidden">
+      <div className="bg-brand-navy rounded-[32px] max-w-7xl mx-auto overflow-hidden">
         <div className="grid grid-cols-1 sm:grid-cols-3">
           {stats.map((stat, i) => (
             <div
@@ -31,13 +31,10 @@ export default function StatBanner() {
                   : "",
               ].join(" ")}
             >
-              <span
-                className="text-5xl lg:text-6xl font-black text-[#FF8200] leading-none"
-                style={{ fontFamily: "var(--font-baloo2)" }}
-              >
+              <span className="font-display text-5xl lg:text-6xl font-black text-brand-coral leading-none">
                 {stat.num}
               </span>
-              <p className="text-sm text-white/75 leading-relaxed max-w-[220px]">
+              <p className="text-sm text-white/75 leading-relaxed max-w-[240px]">
                 {stat.label}
               </p>
             </div>

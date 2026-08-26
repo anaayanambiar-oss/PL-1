@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Tailwind v4 no longer auto-discovers tailwind.config.ts — it must be
+   loaded explicitly, otherwise every brand token (brand-coral, ink-soft,
+   shadow-coral, animate-fade-up, font-display …) silently resolves to
+   nothing and the page renders unstyled. */
+@config "../tailwind.config.ts";
 
 /* ── PL 2.2 CSS Custom Properties ────────────────────────── */
 :root {
@@ -64,6 +68,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Keep #anchor targets clear of the 4rem fixed navbar. */
+  scroll-padding-top: 4rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -95,4 +101,17 @@ body {
 /* ── Safe area for mobile bottom nav ────────────────────── */
 .safe-area-pb {
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
