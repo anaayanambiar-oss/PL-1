@@ -26,13 +26,10 @@ export default function SignUpPage() {
         {/* Heading above the Clerk widget */}
         <div className="flex flex-col items-center text-center mb-8 gap-2">
           <span className="text-3xl">🎓</span>
-          <h1
-            className="text-2xl font-black text-[#0F1023]"
-            style={{ fontFamily: "var(--font-baloo2)" }}
-          >
+          <h1 className="font-display text-2xl font-black text-brand-navy">
             Start learning today
           </h1>
-          <p className="text-sm text-[#4B5063]">
+          <p className="text-sm text-ink-soft">
             Free for every child. No credit card. No catch.
           </p>
           {/* Trust badges */}
@@ -65,7 +62,7 @@ export default function SignUpPage() {
             elements: {
               card: "shadow-[0_4px_40px_rgba(15,16,35,0.10)] border border-black/[0.06] rounded-3xl",
               headerTitle: "font-black text-[#0F1023]",
-              headerSubtitle: "text-[#4B5063]",
+              headerSubtitle: "text-ink-soft",
               socialButtonsBlockButton:
                 "border border-black/[0.08] rounded-xl hover:border-[#FF8200]/30 hover:bg-[#FFF0E0] transition-colors",
               formButtonPrimary:
@@ -74,7 +71,7 @@ export default function SignUpPage() {
               formFieldInput:
                 "border border-black/[0.08] rounded-xl focus:border-[#FF8200] focus:ring-1 focus:ring-[#FF8200]",
               dividerLine: "bg-black/[0.06]",
-              dividerText: "text-[#4B5063] text-xs",
+              dividerText: "text-ink-soft text-xs",
             },
           }}
         />
@@ -82,10 +79,12 @@ export default function SignUpPage() {
 
       {/* Bottom footer note */}
       <footer className="relative z-10 py-4 text-center">
-        <p className="text-xs text-[#4B5063]/50">
+        <p className="text-xs text-ink-soft/50">
           © 2025 PoliticaLearn · Safe &amp; free for every child
         </p>
       </footer>
     </div>
   );
 }
+
+
