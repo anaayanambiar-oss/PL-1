@@ -1,4 +1,4 @@
-import Link from "next/link";
+import StartButton from "@/components/ui/StartButton";
 
 const stats = [
   { num: "3",    label: "Learning Levels" },
@@ -63,12 +63,13 @@ export default function Hero() {
 
         {/* CTAs */}
         <div className="flex items-center gap-4 flex-wrap animate-fade-up animation-delay-300">
-          <a href="#signup"
-             className="px-8 py-4 rounded-full bg-brand-coral text-white font-bold
-                        text-base shadow-coral hover:-translate-y-1 hover:shadow-lg
-                        transition-all duration-200 flex items-center gap-2">
+          <StartButton
+            signedInLabel="🎓 Go to My Dashboard"
+            className="px-8 py-4 rounded-full bg-brand-coral text-white font-bold
+                       text-base shadow-coral hover:-translate-y-1 hover:shadow-lg
+                       transition-all duration-200 flex items-center gap-2">
             🎓 Start for Free
-          </a>
+          </StartButton>
           <a href="#curriculum"
              className="px-7 py-4 rounded-full border-2 border-brand-blue text-brand-blue
                         font-semibold text-base bg-white

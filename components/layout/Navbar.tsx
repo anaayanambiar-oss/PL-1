@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import StartButton from "@/components/ui/StartButton";
 
 const navLinks = [
   { label: "How it works",  href: "#how" },
@@ -41,12 +42,13 @@ export default function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <a href="#signup"
-             className="px-5 py-2.5 rounded-full bg-brand-coral text-white text-sm
-                        font-bold shadow-coral hover:-translate-y-0.5 hover:shadow-lg
-                        transition-all duration-200">
+          <StartButton
+            signedInLabel="My Dashboard →"
+            className="px-5 py-2.5 rounded-full bg-brand-coral text-white text-sm
+                       font-bold shadow-coral hover:-translate-y-0.5 hover:shadow-lg
+                       transition-all duration-200">
             Start for Free →
-          </a>
+          </StartButton>
         </div>
 
         {/* Mobile hamburger */}
@@ -73,12 +75,13 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <a href="#signup"
-             className="mt-4 block text-center px-5 py-3 rounded-full
-                        bg-brand-coral text-white text-sm font-bold"
-             onClick={() => setMenuOpen(false)}>
+          <StartButton
+            signedInLabel="My Dashboard →"
+            onClick={() => setMenuOpen(false)}
+            className="mt-4 block text-center px-5 py-3 rounded-full
+                       bg-brand-coral text-white text-sm font-bold">
             Start for Free →
-          </a>
+          </StartButton>
         </div>
       )}
     </header>

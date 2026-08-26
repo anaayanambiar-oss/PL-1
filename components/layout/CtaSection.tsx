@@ -1,8 +1,9 @@
-import Button from "@/components/ui/Button";
+import Button, { buttonClasses } from "@/components/ui/Button";
+import StartButton from "@/components/ui/StartButton";
 
 export default function CtaSection() {
   return (
-    // id="signup" is the target of the "Start for Free" links in the navbar and hero.
+    // id="signup" is kept as a scroll target for any external #signup deep links.
     <section id="signup" className="relative py-24 overflow-hidden bg-brand-cream">
       {/* Ambient blobs */}
       <div
@@ -26,9 +27,11 @@ export default function CtaSection() {
           learning.
         </p>
         <div className="flex flex-wrap gap-3 justify-center mt-2">
-          <Button variant="primary" size="lg" href="/sign-up">
+          <StartButton
+            className={buttonClasses("primary", "lg")}
+            signedInLabel="🎓 Go to My Dashboard">
             🎓 Start Learning — It&apos;s Free
-          </Button>
+          </StartButton>
           <Button variant="outline" size="lg" href="#curriculum">
             📚 Explore the Curriculum
           </Button>
