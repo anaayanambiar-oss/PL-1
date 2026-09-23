@@ -25,6 +25,7 @@ export default function OnboardingPage() {
 
   const [step, setStep] = useState(1);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<OnboardingData>({
     name:     user?.firstName ?? "",
     age:      null,
@@ -41,6 +42,7 @@ export default function OnboardingPage() {
 
   async function finish() {
     setSaving(true);
+    setError(null);
     try {
       const res = await fetch("/api/onboarding", {
         method: "POST",
@@ -53,10 +55,23 @@ export default function OnboardingPage() {
           interest: data.interest,
         }),
       });
-      if (!res.ok) throw new Error("Failed to save onboarding");
+      // Session expired mid-onboarding: send them back through sign-in.
+      if (res.status === 401) {
+        router.push("/sign-in?redirect_url=/onboarding");
+        return;
+      }
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(body?.error ?? "Failed to save onboarding");
+      }
       router.push("/dashboard");
     } catch (err) {
       console.error(err);
+      // Previously the error was only logged, leaving the user stuck on the
+      // final step with no feedback.
+      setError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
       setSaving(false);
     }
   }
@@ -138,6 +153,7 @@ export default function OnboardingPage() {
             name={data.name}
             onFinish={finish}
             saving={saving}
+            error={error}
           />
         )}
       </div>

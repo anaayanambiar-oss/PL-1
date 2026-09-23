@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { Show } from "@clerk/nextjs";
 
 type StartButtonProps = {
   className?: string;
@@ -13,8 +13,11 @@ type StartButtonProps = {
 };
 
 // Signed-out visitors go to sign-up; signed-in users go straight to the
-// dashboard. Clerk resolves SignedIn/SignedOut on the server, so there is no
-// flash of the wrong link on first paint.
+// dashboard, so the CTA never dead-ends on the landing page.
+//
+// Clerk v7 replaced <SignedIn>/<SignedOut> with <Show when="signed-in">.
+// Show resolves on the server inside RSCs and on the client inside client
+// components, so this one component works in both Hero/CtaSection and Navbar.
 export default function StartButton({
   className,
   children,
@@ -22,17 +25,17 @@ export default function StartButton({
   onClick,
 }: StartButtonProps) {
   return (
-    <>
-      <SignedOut>
+    <Show
+      when="signed-in"
+      fallback={
         <Link href="/sign-up" className={className} onClick={onClick}>
           {children}
         </Link>
-      </SignedOut>
-      <SignedIn>
-        <Link href="/dashboard" className={className} onClick={onClick}>
-          {signedInLabel ?? children}
-        </Link>
-      </SignedIn>
-    </>
+      }
+    >
+      <Link href="/dashboard" className={className} onClick={onClick}>
+        {signedInLabel ?? children}
+      </Link>
+    </Show>
   );
 }

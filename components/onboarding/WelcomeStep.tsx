@@ -12,9 +12,10 @@ interface Props {
   name:     string;
   onFinish: () => void;
   saving:   boolean;
+  error?:   string | null;
 }
 
-export default function WelcomeStep({ name, onFinish, saving }: Props) {
+export default function WelcomeStep({ name, onFinish, saving, error }: Props) {
   return (
     <div className="text-center py-4">
 
@@ -56,6 +57,13 @@ export default function WelcomeStep({ name, onFinish, saving }: Props) {
       <p className="text-sm text-mid mb-6">
         🏛️ Your first building is waiting to be unlocked!
       </p>
+
+      {/* Save error — shown when /api/onboarding fails */}
+      {error && (
+        <p role="alert" className="text-sm font-semibold text-red-600 mb-4">
+          {error}
+        </p>
+      )}
 
       {/* CTA */}
       <button

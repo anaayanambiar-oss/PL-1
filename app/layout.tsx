@@ -37,7 +37,16 @@ export default function RootLayout({
  children: React.ReactNode;
 }) {
  return (
-   <ClerkProvider>
+   // Auth URLs are set here rather than left to NEXT_PUBLIC_CLERK_* env vars.
+   // If those vars are missing on the host, Clerk sends users to its hosted
+   // Account Portal and returns them to "/" after sign-in instead of /dashboard.
+   // /dashboard forwards to /onboarding until the profile is complete.
+   <ClerkProvider
+     signInUrl="/sign-in"
+     signUpUrl="/sign-up"
+     signInFallbackRedirectUrl="/dashboard"
+     signUpFallbackRedirectUrl="/dashboard"
+   >
      <html lang="en" className={`${baloo.variable} ${jakarta.variable}`}>
        <body className="font-body antialiased bg-cream text-ink">
          {children}
