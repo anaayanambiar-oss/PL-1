@@ -1,0 +1,123 @@
+[{
+  "version": "1.0",
+  "image": {
+    "name": "/var/www/imageconvert_usr/data/www/imageconvert.org/image/public/uploadt/nationalflagplaza.jpeg",
+    "permissions": 644,
+    "format": "JSON",
+    "formatDescription": "The image format and characteristics",
+    "mimeType": "application/json",
+    "class": "DirectClass",
+    "geometry": {
+      "width": 1024,
+      "height": 559,
+      "x": 0,
+      "y": 0
+    },
+    "units": "Undefined",
+    "type": "TrueColor",
+    "endianness": "Undefined",
+    "colorspace": "sRGB",
+    "depth": 8,
+    "baseDepth": 8,
+    "channelDepth": {
+      "red": 8,
+      "green": 8,
+      "blue": 8
+    },
+    "pixels": 572416,
+    "imageStatistics": {
+      "all": {
+        "min": 0,
+        "max": 255,
+        "mean": 232.754,
+        "standardDeviation": 41.213,
+        "kurtosis": 14.5924,
+        "skewness": -3.82842,
+        "entropy": 0.388235
+      }
+    },
+    "channelStatistics": {
+      "red": {
+        "min": 0,
+        "max": 255,
+        "mean": 234.948,
+        "standardDeviation": 48.9269,
+        "kurtosis": 12.2374,
+        "skewness": -3.673,
+        "entropy": 0.374182
+      },
+      "green": {
+        "min": 0,
+        "max": 255,
+        "mean": 234.972,
+        "standardDeviation": 39.9142,
+        "kurtosis": 14.0888,
+        "skewness": -3.74479,
+        "entropy": 0.326071
+      },
+      "blue": {
+        "min": 0,
+        "max": 255,
+        "mean": 228.343,
+        "standardDeviation": 34.7979,
+        "kurtosis": 18.8456,
+        "skewness": -4.20653,
+        "entropy": 0.464454
+      }
+    },
+    "renderingIntent": "Perceptual",
+    "gamma": 0.454545,
+    "chromaticity": {
+      "redPrimary": {
+        "x": 0.64,
+        "y": 0.33
+      },
+      "greenPrimary": {
+        "x": 0.3,
+        "y": 0.6
+      },
+      "bluePrimary": {
+        "x": 0.15,
+        "y": 0.06
+      },
+      "whitePrimary": {
+        "x": 0.3127,
+        "y": 0.329
+      }
+    },
+    "backgroundColor": "#FFFFFF",
+    "borderColor": "#DFDFDF",
+    "matteColor": "#BDBDBD",
+    "transparentColor": "#000000",
+    "interlace": "None",
+    "intensity": "Undefined",
+    "compose": "Over",
+    "pageGeometry": {
+      "width": 1024,
+      "height": 559,
+      "x": 0,
+      "y": 0
+    },
+    "dispose": "Undefined",
+    "iterations": 0,
+    "compression": "JPEG",
+    "quality": 93,
+    "orientation": "Undefined",
+    "properties": {
+      "date:create": "2026-10-18T02:48:40+00:00",
+      "date:modify": "2026-10-18T02:48:40+00:00",
+      "date:timestamp": "2026-10-18T02:48:42+00:00",
+      "jpeg:colorspace": "2",
+      "jpeg:sampling-factor": "2x2,1x1,1x1",
+      "signature": "7a7390aafc3f863e1c52b4e0735e99cc131fc133c4c31dbccea67853d76a04c2"
+    },
+    "tainted": false,
+    "filesize": "34138B",
+    "numberPixels": "572416",
+    "pixelsPerSecond": "137.795MB",
+    "userTime": "0.000u",
+    "elapsedTime": "0:01.004",
+    "version": "ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+  }
+}
+]

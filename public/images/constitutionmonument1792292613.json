@@ -1,0 +1,123 @@
+[{
+  "version": "1.0",
+  "image": {
+    "name": "/var/www/imageconvert_usr/data/www/imageconvert.org/image/public/uploadt/constitutionmonument.jpeg",
+    "permissions": 644,
+    "format": "JSON",
+    "formatDescription": "The image format and characteristics",
+    "mimeType": "application/json",
+    "class": "DirectClass",
+    "geometry": {
+      "width": 1024,
+      "height": 559,
+      "x": 0,
+      "y": 0
+    },
+    "units": "Undefined",
+    "type": "TrueColor",
+    "endianness": "Undefined",
+    "colorspace": "sRGB",
+    "depth": 8,
+    "baseDepth": 8,
+    "channelDepth": {
+      "red": 8,
+      "green": 8,
+      "blue": 8
+    },
+    "pixels": 572416,
+    "imageStatistics": {
+      "all": {
+        "min": 0,
+        "max": 255,
+        "mean": 236.85,
+        "standardDeviation": 35.8531,
+        "kurtosis": 19.6846,
+        "skewness": -4.30982,
+        "entropy": 0.369962
+      }
+    },
+    "channelStatistics": {
+      "red": {
+        "min": 0,
+        "max": 255,
+        "mean": 237.393,
+        "standardDeviation": 36.473,
+        "kurtosis": 22.19,
+        "skewness": -4.65531,
+        "entropy": 0.38084
+      },
+      "green": {
+        "min": 0,
+        "max": 255,
+        "mean": 239.513,
+        "standardDeviation": 35.2392,
+        "kurtosis": 22.4155,
+        "skewness": -4.59443,
+        "entropy": 0.342568
+      },
+      "blue": {
+        "min": 0,
+        "max": 255,
+        "mean": 233.643,
+        "standardDeviation": 35.8471,
+        "kurtosis": 15.1903,
+        "skewness": -3.75453,
+        "entropy": 0.386479
+      }
+    },
+    "renderingIntent": "Perceptual",
+    "gamma": 0.454545,
+    "chromaticity": {
+      "redPrimary": {
+        "x": 0.64,
+        "y": 0.33
+      },
+      "greenPrimary": {
+        "x": 0.3,
+        "y": 0.6
+      },
+      "bluePrimary": {
+        "x": 0.15,
+        "y": 0.06
+      },
+      "whitePrimary": {
+        "x": 0.3127,
+        "y": 0.329
+      }
+    },
+    "backgroundColor": "#FFFFFF",
+    "borderColor": "#DFDFDF",
+    "matteColor": "#BDBDBD",
+    "transparentColor": "#000000",
+    "interlace": "None",
+    "intensity": "Undefined",
+    "compose": "Over",
+    "pageGeometry": {
+      "width": 1024,
+      "height": 559,
+      "x": 0,
+      "y": 0
+    },
+    "dispose": "Undefined",
+    "iterations": 0,
+    "compression": "JPEG",
+    "quality": 93,
+    "orientation": "Undefined",
+    "properties": {
+      "date:create": "2026-10-18T03:03:31+00:00",
+      "date:modify": "2026-10-18T03:03:31+00:00",
+      "date:timestamp": "2026-10-18T03:03:33+00:00",
+      "jpeg:colorspace": "2",
+      "jpeg:sampling-factor": "2x2,1x1,1x1",
+      "signature": "92f2888fead28463b03cb43d2d02f115ce71f07513b4a0bc559b9ee4fbb556a1"
+    },
+    "tainted": false,
+    "filesize": "29838B",
+    "numberPixels": "572416",
+    "pixelsPerSecond": "172.994MB",
+    "userTime": "0.000u",
+    "elapsedTime": "0:01.003",
+    "version": "ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+  }
+}
+]
