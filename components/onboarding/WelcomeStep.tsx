@@ -41,7 +41,7 @@ export default function WelcomeStep({ name, onFinish, saving, error }: Props) {
       <div className="flex justify-center gap-8 py-5 mb-6 border-y border-black/[0.06]">
         <div className="flex flex-col items-center gap-1">
           <span className="font-display font-black text-2xl text-brand-orange">0</span>
-          <span className="text-xs text-mid font-medium">XP Earned</span>
+          <span className="text-xs text-mid font-medium">Coins</span>
         </div>
         <div className="flex flex-col items-center gap-1">
           <span className="font-display font-black text-2xl text-brand-orange">0</span>

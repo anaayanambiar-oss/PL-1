@@ -4,12 +4,15 @@
 import Link from "next/link";
 import type { Level } from "@/lib/types";
 import DashboardNav from "@/components/dashboard/DashboardNav";
+import CoinIcon from "@/components/ui/CoinIcon";
+import { LESSON_BASE_COINS } from "@/lib/coin-config";
 
 
 interface Props {
  curriculum:       Level[];
  lessonsCompleted: string[];
  currentLevel:     number;
+ coinBalance:      number;
  totalLessons:     number;
 }
 
@@ -25,6 +28,7 @@ export default function LessonsIndexShell({
  curriculum,
  lessonsCompleted,
  currentLevel,
+ coinBalance,
  totalLessons,
 }: Props) {
  const totalCompleted = lessonsCompleted.length;
@@ -41,9 +45,15 @@ export default function LessonsIndexShell({
 
        {/* Page header */}
        <div className="mb-8">
-         <h1 className="font-display font-black text-3xl text-ink mb-1">
-           All Lessons
-         </h1>
+         <div className="flex items-center justify-between gap-3 mb-1">
+           <h1 className="font-display font-black text-3xl text-ink">
+             All Lessons
+           </h1>
+           <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-orange/10
+                            text-sm font-bold text-brand-orange" aria-label={`${coinBalance} coins`}>
+             <CoinIcon size={18} /> {coinBalance}
+           </span>
+         </div>
          <p className="text-ink-soft text-sm">
            {totalCompleted} of {totalLessons} lessons completed
          </p>
@@ -181,7 +191,7 @@ export default function LessonsIndexShell({
                            {lesson.title}
                          </p>
                          <p className="text-xs text-mid mt-0.5">
-                           +{lesson.xpReward} XP
+                           +{LESSON_BASE_COINS[lesson.id] ?? 0} coins
                            {lesson.badgeId ? " · Badge" : ""}
                            {" · ~5 min"}
                          </p>

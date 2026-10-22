@@ -1,108 +1,100 @@
 // lib/society-config.ts
-// ── Civic element definitions ─────────────────────────────────
+// Society Builder catalog: 17 items in 5 tiers (guideline v2.0, section 6.2).
+// Replaces the old 5-building CIVIC_ELEMENTS list.
+import { levelLessonIds, LESSON_REFS } from "@/lib/coin-config";
 
-export interface CivicElement {
+export type TierNumber = 1 | 2 | 3 | 4 | 5;
+
+export interface SocietyItem {
   id:          string;
   name:        string;
-  icon:        string;         // emoji placeholder (replace with SVG later)
-  description: string;         // what this element does for the city
-  unlockAt:    number;         // number of lessons completed to unlock
-  population:  number;         // population added to the city when unlocked
-  color:       string;         // tailwind bg class
-  borderColor: string;         // tailwind border class
-  textColor:   string;         // tailwind text class
-  lightColor:  string;         // tailwind light bg class
-  fact:        string;         // civic education fact shown on unlock
+  tier:        TierNumber;
+  cost:        number;
+  maxQuantity: number | null; // 1 = collectible once, null = unlimited
+  icon:        string;        // emoji shown until artwork is uploaded
+  image?:      string;        // /public path; falls back to icon if missing
+  lockedImage?: string;       // optional dedicated "locked" artwork
 }
 
-export const CIVIC_ELEMENTS: CivicElement[] = [
-  {
-    id:          "school",
-    name:        "School",
-    icon:        "🏫",
-    description: "Every child deserves an education. The school is the foundation of your city.",
-    unlockAt:    1,
-    population:  500,
-    color:       "bg-brand-blue",
-    borderColor: "border-brand-blue",
-    textColor:   "text-brand-blue",
-    lightColor:  "bg-brand-blue/8",
-    fact:        "India's Right to Education Act guarantees free schooling to every child between 6 and 14 years of age.",
-  },
-  {
-    id:          "hospital",
-    name:        "Hospital",
-    icon:        "🏥",
-    description: "A healthy city is a strong city. The hospital keeps your citizens safe.",
-    unlockAt:    3,
-    population:  800,
-    color:       "bg-rose-600",
-    borderColor: "border-rose-400",
-    textColor:   "text-rose-600",
-    lightColor:  "bg-rose-50",
-    fact:        "The Indian government runs over 25,000 public hospitals to ensure healthcare reaches every citizen, regardless of income.",
-  },
-  {
-    id:          "municipality",
-    name:        "Town Hall",
-    icon:        "🏢",
-    description: "Local government in action. The Town Hall is where your city's decisions are made.",
-    unlockAt:    6,
-    population:  1200,
-    color:       "bg-brand-orange",
-    borderColor: "border-brand-orange",
-    textColor:   "text-brand-orange",
-    lightColor:  "bg-brand-orange/8",
-    fact:        "India has over 250,000 Panchayats — local governing bodies that manage villages and towns across the country.",
-  },
-  {
-    id:          "park",
-    name:        "Public Park",
-    icon:        "🌳",
-    description: "A city needs green spaces. The park brings communities together.",
-    unlockAt:    9,
-    population:  600,
-    color:       "bg-green-600",
-    borderColor: "border-green-400",
-    textColor:   "text-green-700",
-    lightColor:  "bg-green-50",
-    fact:        "Public parks and open spaces are a citizen's right. Many cities in India have reserved land specifically for community green areas.",
-  },
-  {
-    id:          "parliament",
-    name:        "Parliament",
-    icon:        "🏛️",
-    description: "The highest symbol of democracy. Parliament is where India's laws are born.",
-    unlockAt:    12,
-    population:  5000,
-    color:       "bg-purple-600",
-    borderColor: "border-purple-400",
-    textColor:   "text-purple-700",
-    lightColor:  "bg-purple-50",
-    fact:        "India's Parliament consists of two houses — the Lok Sabha (545 members) and the Rajya Sabha (245 members) — and has been in operation since 1952.",
-  },
+export interface Tier {
+  tier:       TierNumber;
+  name:       string;
+  requires:   string[]; // lesson ids that must ALL be completed
+  unlockText: string;
+}
+
+export const TIERS: Tier[] = [
+  { tier: 1, name: "Basics",              requires: [],                            unlockText: "Available from the start" },
+  { tier: 2, name: "Community",           requires: levelLessonIds(1),             unlockText: "Unlocks after Level 1" },
+  { tier: 3, name: "Civic Institutions",  requires: [LESSON_REFS.localGovernment], unlockText: "Unlocks after Lesson 9 (Local Government in Action)" },
+  { tier: 4, name: "National Government", requires: levelLessonIds(2),             unlockText: "Unlocks after Level 2" },
+  { tier: 5, name: "Landmarks",           requires: levelLessonIds(3),             unlockText: "Unlocks after Level 3" },
 ];
 
-export const TOTAL_POPULATION = CIVIC_ELEMENTS.reduce(
-  (acc, el) => acc + el.population, 0
-);
+// Prices are proposals inside Anaaya's ranges. Confirm each one.
+// Artwork: upload to /public/society/{item-id}.png and add `image` below.
+export const SOCIETY_ITEMS: SocietyItem[] = [
+  // Tier 1: 8 to 15 coins each
+  { id: "streetlight", name: "Streetlight", tier: 1, cost: 8,  maxQuantity: 1, icon: "💡" },
+  { id: "dustbin",     name: "Dustbin",     tier: 1, cost: 10, maxQuantity: 1, icon: "🗑️" },
+  { id: "road",        name: "Road",        tier: 1, cost: 15, maxQuantity: 1, icon: "🛣️" },
+  // Tier 2: 20 to 35 coins each
+  { id: "park",        name: "Park",        tier: 2, cost: 20, maxQuantity: 1, icon: "🌳" },
+  { id: "water-tower", name: "Water Tower", tier: 2, cost: 25, maxQuantity: 1, icon: "🗼" },
+  { id: "police-post", name: "Police Post", tier: 2, cost: 30, maxQuantity: 1, icon: "🚓" },
+  { id: "school",      name: "School",      tier: 2, cost: 35, maxQuantity: 1, icon: "🏫" },
+  // Tier 3: 40 to 60 coins each
+  { id: "local-market",     name: "Local Market",                 tier: 3, cost: 40, maxQuantity: 1, icon: "🛒" },
+  { id: "panchayat-office", name: "Panchayat / Municipal Office", tier: 3, cost: 50, maxQuantity: 1, icon: "🏢",
+    image: "/society/panchayat-office.webp", lockedImage: "/society/panchayat-office-locked.webp" },
+  { id: "hospital",         name: "Hospital",                     tier: 3, cost: 60, maxQuantity: 1, icon: "🏥",
+    image: "/society/hospital.webp", lockedImage: "/society/hospital-locked.webp" },
+  // Tier 4: 70 to 100 coins each
+  { id: "voting-booth-monument", name: "Voting Booth Monument", tier: 4, cost: 70,  maxQuantity: 1, icon: "🗳️" },
+  { id: "courthouse",            name: "Courthouse",            tier: 4, cost: 80,  maxQuantity: 1, icon: "⚖️" },
+  { id: "presidents-house",      name: "President's House",     tier: 4, cost: 90,  maxQuantity: 1, icon: "🏰" },
+  { id: "parliament-house",      name: "Parliament House",      tier: 4, cost: 100, maxQuantity: 1, icon: "🏛️" },
+  // Tier 5: 130 to 180 coins each
+  { id: "national-flag-plaza",   name: "National Flag Plaza",   tier: 5, cost: 130, maxQuantity: 1, icon: "🇮🇳" },
+  { id: "media-tower",           name: "Media Tower",           tier: 5, cost: 150, maxQuantity: 1, icon: "📡" },
+  { id: "constitution-monument", name: "Constitution Monument", tier: 5, cost: 180, maxQuantity: 1, icon: "📜" },
+];
 
-// Returns the next element the student hasn't unlocked yet
-export function getNextElement(
-  unlocked: string[],
-  lessonsCompleted: number
-): CivicElement | null {
-  return CIVIC_ELEMENTS.find(
-    (el) => !unlocked.includes(el.id) && lessonsCompleted >= el.unlockAt
-  ) ?? null;
+export function getItem(itemId: string): SocietyItem | undefined {
+  return SOCIETY_ITEMS.find((i) => i.id === itemId);
 }
 
-// Returns elements the student can unlock now but hasn't yet
-export function getReadyToUnlock(
-  unlocked: string[],
-  lessonsCompleted: number
-): CivicElement[] {
-  return CIVIC_ELEMENTS.filter(
-    (el) => !unlocked.includes(el.id) && lessonsCompleted >= el.unlockAt
-  );
+export function getTier(tier: TierNumber): Tier {
+  return TIERS.find((t) => t.tier === tier)!;
+}
+
+// Shared by the page (to show locked states) and the purchase route's SQL gate.
+export function isTierUnlocked(tier: TierNumber, lessonsCompleted: string[]): boolean {
+  return getTier(tier).requires.every((id) => lessonsCompleted.includes(id));
+}
+
+// Why an item can't be built right now, or null if it can. UI only — the
+// purchase route re-checks every condition in the database.
+export function buildBlocker(
+  item: SocietyItem,
+  owned: number,
+  balance: number,
+  lessonsCompleted: string[],
+): "locked" | "owned" | "too-expensive" | null {
+  if (!isTierUnlocked(item.tier, lessonsCompleted)) return "locked";
+  if (item.maxQuantity !== null && owned >= item.maxQuantity) return "owned";
+  if (balance < item.cost) return "too-expensive";
+  return null;
+}
+
+// The cheapest item the student could build right now, for the dashboard.
+export function nextAffordableItem(
+  ownedCounts: Record<string, number>,
+  balance: number,
+  lessonsCompleted: string[],
+): SocietyItem | null {
+  return [...SOCIETY_ITEMS]
+    .sort((a, b) => a.cost - b.cost)
+    .find((i) => buildBlocker(i, ownedCounts[i.id] ?? 0, balance, lessonsCompleted) === null)
+    ?? null;
 }

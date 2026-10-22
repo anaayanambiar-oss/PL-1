@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Lesson } from "@/lib/types";
+import { LESSON_BASE_COINS } from "@/lib/coin-config";
+import CoinIcon from "@/components/ui/CoinIcon";
 
 interface Props { lesson: Lesson | null; }
 
@@ -47,7 +49,7 @@ export default function NextLessonCard({ lesson }: Props) {
         {/* Meta */}
         <div className="flex items-center gap-4 mb-6 text-xs text-mid font-medium">
           <span className="flex items-center gap-1.5">
-            <span>⭐</span> +{lesson.xpReward} XP
+            <CoinIcon size={16} /> +{LESSON_BASE_COINS[lesson.id] ?? 0} coins
           </span>
           <span className="flex items-center gap-1.5">
             <span>⏱</span> ~5 min

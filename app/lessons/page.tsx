@@ -1,7 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import sql from "@/lib/db";
-import { CURRICULUM, TOTAL_LESSONS } from "@/lib/curriculum";
+import { CURRICULUM, TOTAL_LESSONS, getCurrentLevel } from "@/lib/curriculum";
+import { getCoinBalance } from "@/lib/coins";
 import LessonsIndexShell from "@/components/lessons/LessonsIndexShell";
 
 
@@ -14,7 +15,7 @@ export default async function LessonsPage() {
 
 
  const rows = await sql`
-   SELECT current_level, lessons_completed, total_xp, streak_days
+   SELECT lessons_completed, streak_days
    FROM users
    WHERE clerk_id = ${userId}
    LIMIT 1
@@ -24,13 +25,17 @@ export default async function LessonsPage() {
 
 
  const completed: string[] = profile.lessons_completed ?? [];
+ const { balance } = await getCoinBalance(userId);
 
 
  return (
    <LessonsIndexShell
      curriculum={CURRICULUM}
      lessonsCompleted={completed}
-     currentLevel={profile.current_level ?? 1}
+     // Derived from completed lessons; users.current_level is never updated,
+     // which left Levels 2 and 3 locked for everyone.
+     currentLevel={getCurrentLevel(completed).number}
+     coinBalance={balance}
      totalLessons={TOTAL_LESSONS}
    />
  );

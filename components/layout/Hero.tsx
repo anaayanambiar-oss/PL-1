@@ -1,4 +1,5 @@
 import StartButton from "@/components/ui/StartButton";
+import { BADGE_BONUS } from "@/lib/coin-config";
 
 const stats = [
   { num: "3",    label: "Learning Levels" },
@@ -102,7 +103,7 @@ export default function Hero() {
           <span className="text-2xl">🏆</span>
           <div>
             <p className="text-sm font-bold text-brand-navy leading-tight">Level 1 Complete!</p>
-            <p className="text-xs text-mid">+200 XP earned</p>
+            <p className="text-xs text-mid">+{BADGE_BONUS["foundation-builder"] ?? 0} bonus coins</p>
           </div>
         </div>
 

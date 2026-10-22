@@ -6,7 +6,7 @@ export interface User {
 export interface UserProgress {
   userId: string; currentLevel: 1 | 2 | 3;
   currentLessonId: string; lessonsCompleted: string[];
-  totalXP: number; lastScore: number;
+  coinsEarned: number; lastScore: number;
   streakDays: number; lastActiveDate: string;
   badges: string[];
 }
@@ -28,7 +28,10 @@ export interface Lesson {
 
 export interface Badge {
   id: string; name: string;
-  description: string; icon: string; trigger: string;
+  description: string;
+  icon: string;    // emoji fallback until the badge image is uploaded
+  image: string;   // /public/badges/{id}.png
+  trigger: string; // milestone hint shown while the badge is locked
 }
 
 export interface ApiResponse<T> {

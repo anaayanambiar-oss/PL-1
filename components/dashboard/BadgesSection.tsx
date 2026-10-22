@@ -1,10 +1,13 @@
 import { BADGES } from "@/lib/constants";
+import { BADGE_BONUS } from "@/lib/coin-config";
+import AssetImage from "@/components/ui/AssetImage";
 
 interface Props { earnedBadgeIds: string[]; }
 
+// All 12 badges (guideline v2.0, section 10.3): earned in colour, locked in
+// grey with the milestone as the hint.
 export default function BadgesSection({ earnedBadgeIds }: Props) {
-  const earned = BADGES.filter((b) => earnedBadgeIds.includes(b.id));
-  const locked = BADGES.filter((b) => !earnedBadgeIds.includes(b.id));
+  const earnedCount = BADGES.filter((b) => earnedBadgeIds.includes(b.id)).length;
 
   return (
     <div className="bg-white rounded-3xl border border-black/[0.07] shadow-card p-6">
@@ -14,57 +17,43 @@ export default function BadgesSection({ earnedBadgeIds }: Props) {
         <h3 className="font-display font-bold text-lg text-ink">Badges</h3>
         <span className="text-xs font-bold text-brand-orange bg-brand-orange/10
                          px-2.5 py-1 rounded-full">
-          {earned.length} / {BADGES.length} earned
+          {earnedCount} / {BADGES.length} earned
         </span>
       </div>
 
-      {/* Earned badges */}
-      {earned.length > 0 && (
-        <>
-          <p className="text-xs font-bold uppercase tracking-wider text-mid mb-3">
-            Earned
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-            {earned.map((badge) => (
-              <div
-                key={badge.id}
-                className="flex flex-col items-center text-center p-4 rounded-2xl
-                           bg-brand-orange/8 border border-brand-orange/20"
-              >
-                <span className="text-3xl mb-2">{badge.icon}</span>
-                <p className="font-bold text-xs text-ink leading-snug mb-1">
-                  {badge.name}
-                </p>
-                <p className="text-xs text-mid leading-snug">{badge.description}</p>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-
-      {/* Locked badges */}
-      {locked.length > 0 && (
-        <>
-          <p className="text-xs font-bold uppercase tracking-wider text-mid mb-3">
-            {earned.length > 0 ? "Still to earn" : "Badges to earn"}
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {locked.map((badge) => (
-              <div
-                key={badge.id}
-                className="flex flex-col items-center text-center p-4 rounded-2xl
-                           bg-pale border border-black/[0.06] opacity-60"
-              >
-                <span className="text-3xl mb-2 grayscale">{badge.icon}</span>
-                <p className="font-bold text-xs text-mid leading-snug mb-1">
-                  {badge.name}
-                </p>
-                <p className="text-xs text-soft leading-snug">{badge.trigger}</p>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {BADGES.map((badge) => {
+          const earned = earnedBadgeIds.includes(badge.id);
+          const bonus = BADGE_BONUS[badge.id];
+          return (
+            <div
+              key={badge.id}
+              className={`flex flex-col items-center text-center p-4 rounded-2xl border
+                          ${earned
+                            ? "bg-brand-orange/8 border-brand-orange/20"
+                            : "bg-pale border-black/[0.06]"}`}
+            >
+              <AssetImage
+                src={badge.image}
+                fallback={badge.icon}
+                alt={badge.name}
+                size={48}
+                muted={!earned}
+                className="mb-2"
+              />
+              <p className={`font-bold text-xs leading-snug mb-1 ${earned ? "text-ink" : "text-mid"}`}>
+                {badge.name}
+              </p>
+              <p className={`text-xs leading-snug ${earned ? "text-mid" : "text-soft"}`}>
+                {earned ? badge.description : badge.trigger}
+              </p>
+              {!earned && bonus && (
+                <p className="text-[11px] font-semibold text-brand-orange/80 mt-1">+{bonus} coins</p>
+              )}
+            </div>
+          );
+        })}
+      </div>
 
     </div>
   );

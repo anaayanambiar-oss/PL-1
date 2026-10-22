@@ -5,18 +5,13 @@ interface Props {
   currentLevel:     number;
   currentLevelData: Level;
   lessonsCompleted: string[];
-  totalXP:          number;
-  xpForNextLevel:   number;
 }
 
 export default function LevelProgress({
   currentLevel,
   currentLevelData,
   lessonsCompleted,
-  totalXP,
-  xpForNextLevel,
 }: Props) {
-  const xpPercent = Math.min(100, Math.round((totalXP / xpForNextLevel) * 100));
   const levelLessons = currentLevelData.lessons;
   const completedInLevel = levelLessons.filter((l) =>
     lessonsCompleted.includes(l.id)
@@ -51,24 +46,11 @@ export default function LevelProgress({
         <span>Level progress</span>
         <span>{completedInLevel} / {levelLessons.length} lessons</span>
       </div>
-      <div className="h-2.5 bg-brand-blue/10 rounded-full overflow-hidden mb-5">
+      <div className="h-2.5 bg-brand-blue/10 rounded-full overflow-hidden">
         <div
           className="h-full bg-gradient-to-r from-brand-blue to-brand-orange
                      rounded-full transition-all duration-700"
           style={{ width: `${(completedInLevel / levelLessons.length) * 100}%` }}
-        />
-      </div>
-
-      {/* XP to next level */}
-      <div className="flex items-center justify-between text-xs text-mid font-medium mb-1.5">
-        <span>XP to next level</span>
-        <span>{totalXP} / {xpForNextLevel}</span>
-      </div>
-      <div className="h-2 bg-brand-orange/10 rounded-full overflow-hidden">
-        <div
-          className="h-full bg-gradient-to-r from-brand-orange to-amber-400
-                     rounded-full transition-all duration-700"
-          style={{ width: `${xpPercent}%` }}
         />
       </div>
 

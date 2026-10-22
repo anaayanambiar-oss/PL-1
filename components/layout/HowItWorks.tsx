@@ -7,7 +7,7 @@ const steps = [
   { icon:"📚", title:"Learn Like It’s a Game",
     desc:"Every lesson: a quick video, a real Indian example, and questions that make you think, not memorize." },
   { icon:"🌟", title:"Level Up",
-    desc:"Badges, XP, and a streak that doesn’t want to be broken. Progress you can actually see." },
+    desc:"Badges, coins, and a streak that doesn’t want to be broken. Progress you can actually see." },
 ];
 
 export default function HowItWorks() {

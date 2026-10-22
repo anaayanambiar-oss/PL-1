@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect, notFound } from "next/navigation";
+import sql from "@/lib/db";
 import { LESSONS } from "@/lib/lesson-content";
 import LessonPlayer from "@/components/lesson/LessonPlayer";
 
@@ -15,7 +16,19 @@ export default async function LessonPage({ params }: Props) {
   const lesson = LESSONS[lessonId];
   if (!lesson) notFound();
 
-  return <LessonPlayer lesson={lesson} userId={userId} />;
+  // Questions whose first attempt is already recorded (a replay): no coins
+  // are possible for them, so the MCQ view won't promise any.
+  const answered = await sql`
+    SELECT slide_id FROM mcq_results
+    WHERE clerk_id = ${userId} AND lesson_id = ${lessonId}
+  `;
+
+  return (
+    <LessonPlayer
+      lesson={lesson}
+      answeredSlideIds={answered.map((r) => r.slide_id as string)}
+    />
+  );
 }
 
 export async function generateStaticParams() {

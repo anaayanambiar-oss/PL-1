@@ -40,8 +40,11 @@ export const TOTAL_LESSONS = CURRICULUM.reduce(
   (acc, lvl) => acc + lvl.lessons.length, 0
 );
 
-export const TOTAL_XP = CURRICULUM.reduce(
-  (acc, lvl) => acc + lvl.lessons.reduce((a, l) => a + l.xpReward, 0), 0
-);
-
-
+// The student's level, derived from completed lessons: the first level they
+// have not finished, or the last level once everything is done.
+// users.current_level is never updated, so do not read it for this.
+export function getCurrentLevel(lessonsCompleted: string[]): Level {
+  return CURRICULUM.find(
+    (lvl) => !lvl.lessons.every((l) => lessonsCompleted.includes(l.id))
+  ) ?? CURRICULUM[CURRICULUM.length - 1];
+}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Level } from "@/lib/types";
+import { LESSON_BASE_COINS } from "@/lib/coin-config";
 
 interface Props {
   currentLevel:     Level;
@@ -66,7 +67,7 @@ export default function LessonsGrid({ currentLevel, lessonsCompleted }: Props) {
                   {lesson.title}
                 </p>
                 <p className="text-xs text-mid mt-0.5">
-                  +{lesson.xpReward} XP
+                  +{LESSON_BASE_COINS[lesson.id] ?? 0} coins
                   {lesson.badgeId ? " · Badge" : ""}
                 </p>
               </div>

@@ -1,6 +1,6 @@
-export function formatXP(xp: number): string {
-  if (xp >= 1000) return `${(xp / 1000).toFixed(1)}k XP`;
-  return `${xp} XP`;
+export function formatCoins(coins: number): string {
+  if (coins >= 1000) return `${(coins / 1000).toFixed(1)}k coins`;
+  return `${coins} ${coins === 1 ? "coin" : "coins"}`;
 }
 
 export function getLevelLabel(level: 1 | 2 | 3): string {

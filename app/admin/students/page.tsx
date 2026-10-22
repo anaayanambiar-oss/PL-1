@@ -1,7 +1,7 @@
 // app/admin/students/page.tsx
 import { requireAdmin } from "@/lib/admin-auth";
 import sql from "@/lib/db";
-import { TOTAL_LESSONS } from "@/lib/curriculum";
+import { TOTAL_LESSONS, getCurrentLevel } from "@/lib/curriculum";
 
 export default async function AdminStudentsPage() {
   await requireAdmin();
@@ -11,8 +11,8 @@ export default async function AdminStudentsPage() {
       name,
       age,
       grade,
-      current_level,
-      total_xp,
+      lessons_completed,
+      coins_earned,
       streak_days,
       last_active_date,
       array_length(lessons_completed, 1) as lessons_done,
@@ -21,7 +21,7 @@ export default async function AdminStudentsPage() {
       created_at
     FROM users
     WHERE is_admin = FALSE
-    ORDER BY total_xp DESC, created_at DESC
+    ORDER BY coins_earned DESC, created_at DESC
   `;
 
   return (
@@ -29,7 +29,7 @@ export default async function AdminStudentsPage() {
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-white mb-1">Students</h1>
         <p className="text-gray-400 text-sm">
-          {students.length} registered · sorted by XP
+          {students.length} registered · sorted by coins earned
         </p>
       </div>
 
@@ -49,7 +49,7 @@ export default async function AdminStudentsPage() {
                           text-xs font-bold uppercase tracking-wider text-gray-500">
             <span className="col-span-2">Student</span>
             <span>Level</span>
-            <span>XP</span>
+            <span>Coins</span>
             <span>Lessons</span>
             <span>Streak</span>
             <span>Last Active</span>
@@ -89,12 +89,12 @@ export default async function AdminStudentsPage() {
 
                   {/* Level */}
                   <span className="text-sm text-gray-300">
-                    Level {s.current_level ?? 1}
+                    Level {getCurrentLevel(s.lessons_completed ?? []).number}
                   </span>
 
-                  {/* XP */}
+                  {/* Coins earned (lifetime) */}
                   <span className="text-sm font-bold text-orange-400">
-                    {s.total_xp ?? 0}
+                    {s.coins_earned ?? 0}
                   </span>
 
                   {/* Lessons with mini bar */}

@@ -14,76 +14,30 @@ export const BRAND = {
   ink:    "#0D1B1E",
 };
 
-export const XP_REWARDS = {
-  lessonComplete: 50,
-  levelComplete:  200,
-  perfectScore:   50,
-  streakBonus: {
-    3:  10,
-    7:  25,
-    14: 50,
-    30: 100,
-  } as Record<number, number>,
-};
+// The 12 badges (guideline v2.0, section 10.1). Rules live in lib/badges.ts;
+// coin bonuses live in BADGE_BONUS in lib/coin-config.ts.
+// Images: upload to /public/badges/{id}.png — the emoji shows until then.
+const badge = (id: string, name: string, icon: string, description: string, trigger: string): Badge =>
+  ({ id, name, icon, description, trigger, image: `/badges/${id}.png` });
 
 export const BADGES: Badge[] = [
-  {
-    id:          "first-lesson",
-    name:        "First Steps",
-    description: "Completed your very first lesson on PoliticaLearn.",
-    icon:        "👶",
-    trigger:     "Complete Lesson 1.1",
-  },
-  {
-    id:          "level-1-complete",
-    name:        "Foundations Unlocked",
-    description: "Completed all lessons in Level 1 — Foundations of Government.",
-    icon:        "🏛️",
-    trigger:     "Complete Level 1",
-  },
-  {
-    id:          "level-2-complete",
-    name:        "Your Rights & Duties",
-    description: "Completed all lessons in Level 2 — You and Your Government.",
-    icon:        "📋",
-    trigger:     "Complete Level 2",
-  },
-  {
-    id:          "level-3-complete",
-    name:        "Active Citizen",
-    description: "Completed all lessons in Level 3 — Being an Active Citizen.",
-    icon:        "✊",
-    trigger:     "Complete Level 3",
-  },
-  {
-    id:          "streak-7",
-    name:        "Week Warrior",
-    description: "Logged in and completed at least one lesson for 7 days in a row.",
-    icon:        "🔥",
-    trigger:     "Maintain a 7-day streak",
-  },
-  {
-    id:          "streak-30",
-    name:        "Dedication",
-    description: "30 consecutive days of learning. You are unstoppable.",
-    icon:        "🏆",
-    trigger:     "Maintain a 30-day streak",
-  },
-  {
-    id:          "perfect-score",
-    name:        "Sharp Mind",
-    description: "Scored 100% on an MCQ set without any wrong answers.",
-    icon:        "🎯",
-    trigger:     "Perfect score on any MCQ set",
-  },
-  {
-    id:          "all-complete",
-    name:        "Democracy Champion",
-    description: "Completed every lesson across all three levels.",
-    icon:        "🌟",
-    trigger:     "Complete all 12 lessons",
-  },
+  badge("first-steps",         "First Steps",         "👣", "Completed your very first lesson.",                     "Complete Lesson 1"),
+  badge("foundation-builder",  "Foundation Builder",  "🧱", "Completed every lesson in Level 1.",                    "Complete Level 1"),
+  badge("institution-insider", "Institution Insider", "🏛️", "Completed every lesson in Level 2.",                    "Complete Level 2"),
+  badge("citizen-champion",    "Citizen Champion",    "🏆", "Completed every lesson in Level 3. Course complete!",   "Complete Level 3"),
+  badge("quiz-whiz",           "Quiz Whiz",           "⚡", "Answered 5 questions in a row right on the first try.", "Get 5 first-try answers right in a row"),
+  badge("perfect-scholar",     "Perfect Scholar",     "🎯", "Got every question in a level right on the first try.", "Ace every question in a level on the first try"),
+  badge("voting-champion",     "Voting Champion",     "🗳️", "Completed the Elections and Voting lesson.",            "Complete the Elections and Voting lesson"),
+  badge("constitution-keeper", "Constitution Keeper", "📜", "Aced the Constitution of India lesson on first tries.", "Ace the Constitution lesson on the first try"),
+  badge("coin-collector",      "Coin Collector",      "💰", "Earned 100 coins in total.",                            "Earn 100 coins"),
+  badge("society-architect",   "Society Architect",   "🏗️", "Built 10 things in your society.",                      "Build 10 things in your society"),
+  badge("master-builder",      "Master Builder",      "👷", "Built something from every tier.",                      "Build one thing from every tier"),
+  badge("complete-citizen",    "Complete Citizen",    "🌟", "Finished every lesson and earned every other badge.",   "Finish every lesson and earn all other badges"),
 ];
+
+export function getBadge(id: string): Badge | undefined {
+  return BADGES.find((b) => b.id === id);
+}
 
 export const MASCOT_MESSAGES = {
   correct:       ["Well done! 🦜", "That's right!", "Excellent!", "You've got it! 🎉"],

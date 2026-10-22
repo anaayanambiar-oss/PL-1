@@ -15,7 +15,7 @@ export interface DashboardProfile {
   age:              number;
   currentLevel:     number;
   lessonsCompleted: string[];
-  totalXP:          number;
+  coinBalance:      number;
   streakDays:       number;
   badges:           string[];
   lastActiveDate:   string | null;
@@ -26,7 +26,7 @@ interface Props {
   nextLesson:      Lesson | null;
   currentLevel:    Level;
   totalLessons:    number;
-  xpForNextLevel:  number;
+  ownedCounts:     Record<string, number>;
   clerkFirstName:  string | null;
 }
 
@@ -35,7 +35,7 @@ export default function DashboardShell({
   nextLesson,
   currentLevel,
   totalLessons,
-  xpForNextLevel,
+  ownedCounts,
   clerkFirstName,
 }: Props) {
   const displayName = profile.name || clerkFirstName || "there";
@@ -57,7 +57,7 @@ export default function DashboardShell({
           </div>
           <div>
             <StatsRow
-              totalXP={profile.totalXP}
+              coinBalance={profile.coinBalance}
               streakDays={profile.streakDays}
               currentLevel={profile.currentLevel}
               lessonsCompleted={profile.lessonsCompleted.length}
@@ -76,8 +76,6 @@ export default function DashboardShell({
               currentLevel={profile.currentLevel}
               currentLevelData={currentLevel}
               lessonsCompleted={profile.lessonsCompleted}
-              totalXP={profile.totalXP}
-              xpForNextLevel={xpForNextLevel}
             />
           </div>
         </div>
@@ -93,7 +91,8 @@ export default function DashboardShell({
           <div>
             <SocietyBuilderWidget
               lessonsCompleted={profile.lessonsCompleted}
-              totalLessons={totalLessons}
+              coinBalance={profile.coinBalance}
+              ownedCounts={ownedCounts}
             />
           </div>
         </div>

@@ -1,13 +1,14 @@
 // components/lesson/LessonHeader.tsx
 import Link from "next/link";
+import CoinIcon from "@/components/ui/CoinIcon";
 
 interface Props {
   currentSlide: number;
   totalSlides:  number;
-  xpSoFar:     number;
+  coinsSoFar:   number; // coins earned in this lesson so far (first-try MCQs)
 }
 
-export default function LessonHeader({ currentSlide, totalSlides, xpSoFar }: Props) {
+export default function LessonHeader({ currentSlide, totalSlides, coinsSoFar }: Props) {
   const progress = totalSlides > 0
     ? Math.round((currentSlide / totalSlides) * 100)
     : 0;
@@ -35,9 +36,9 @@ export default function LessonHeader({ currentSlide, totalSlides, xpSoFar }: Pro
         </div>
       </div>
 
-      <div className="flex items-center gap-1.5 flex-shrink-0">
-        <span className="text-base">⭐</span>
-        <span className="font-display font-bold text-sm text-ink">{xpSoFar}</span>
+      <div className="flex items-center gap-1.5 flex-shrink-0" aria-label={`${coinsSoFar} coins earned this lesson`}>
+        <CoinIcon size={20} />
+        <span className="font-display font-bold text-sm text-ink">{coinsSoFar}</span>
       </div>
     </header>
   );

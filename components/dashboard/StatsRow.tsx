@@ -1,7 +1,9 @@
-import { formatXP } from "@/lib/utils";
+import type { ReactNode } from "react";
+import { formatCoins } from "@/lib/utils";
+import CoinIcon from "@/components/ui/CoinIcon";
 
 interface Props {
-  totalXP:          number;
+  coinBalance:      number;
   streakDays:       number;
   currentLevel:     number;
   lessonsCompleted: number;
@@ -9,17 +11,17 @@ interface Props {
 }
 
 export default function StatsRow({
-  totalXP,
+  coinBalance,
   streakDays,
   currentLevel,
   lessonsCompleted,
   totalLessons,
 }: Props) {
-  const stats = [
+  const stats: { icon: ReactNode; label: string; value: string; bg: string; color: string }[] = [
     {
-      icon:    "⭐",
-      label:   "Total XP",
-      value:   formatXP(totalXP),
+      icon:    <CoinIcon size={28} />,
+      label:   "Coins",
+      value:   formatCoins(coinBalance),
       bg:      "bg-brand-orange/8",
       color:   "text-brand-orange",
     },
@@ -54,7 +56,7 @@ export default function StatsRow({
           className={`${s.bg} rounded-2xl p-4 flex flex-col justify-between
                       border border-black/[0.05]`}
         >
-          <span className="text-2xl mb-2">{s.icon}</span>
+          <span className="text-2xl mb-2 flex">{s.icon}</span>
           <div>
             <p className={`font-display font-black text-xl leading-none mb-1 ${s.color}`}>
               {s.value}
